@@ -13,8 +13,8 @@ public class SimpleAI implements ArtificialIntelligence{
     Board board;
     TokenMovement tokenMovement;
     Player.PlayerType color;
-    public static final int SEARCH_DEPTH = 3;
-    public static final int SEARCH_WIDTH = 30;
+    public static final int SEARCH_DEPTH = 1;
+    public static final int SEARCH_WIDTH = 300;
     Node<NodeData> root;
     protected class NodeData implements Comparable{
         MovementData movementData;
@@ -185,7 +185,7 @@ public class SimpleAI implements ArtificialIntelligence{
     protected int findManhattanDistance(Board board, Token king){
         int xPos = king.getxPosition();
         int yPos = king.getyPosition();
-        int boardDimension = board.board.length;
+        int boardDimension = board.BOARD_LENGTH;
         return ((xPos>(boardDimension/2)) ? boardDimension-xPos : xPos )
                 + ((yPos>(boardDimension/2)) ? boardDimension-yPos : yPos);
     }
