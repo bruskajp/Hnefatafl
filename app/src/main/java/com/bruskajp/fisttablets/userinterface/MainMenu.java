@@ -9,6 +9,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.view.View;
+
+import com.bruskajp.fisttablets.Game.Game;
+import com.bruskajp.fisttablets.Game.SinglePlayerGame;
 import com.bruskajp.fisttablets.R;
 import com.bruskajp.fisttablets.artificialintelligence.ComputerPlayer;
 import com.bruskajp.fisttablets.gameengine.Board;
@@ -78,11 +81,10 @@ public class MainMenu extends Activity{
             @Override
             public void onClick(View v) {
 
-                ComputerPlayer computerPlayer = new ComputerPlayer(ComputerPlayer.PlayerType.BLACK);
-                computerPlayer.initializeComputerPlayer();
+                Game SinglePlayerGame = new SinglePlayerGame();
 
-                Intent myIntent = new Intent(v.getContext(), GameBoard.class);
-                startActivityForResult(myIntent, 0);
+                //Intent myIntent = new Intent(v.getContext(), GameBoard.class);
+                //startActivityForResult(myIntent, 0);
 
 
             }
