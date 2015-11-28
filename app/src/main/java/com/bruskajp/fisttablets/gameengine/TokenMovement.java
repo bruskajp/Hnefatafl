@@ -18,6 +18,7 @@ public class TokenMovement {
     }
 
     public Boolean isMoveValid(Token token, int xPosition, int yPosition) {
+        if(xPosition<0||yPosition<0||xPosition>=board.board.length||yPosition>=board.board.length) return false;
         if(token.getxPosition() == xPosition && token.getyPosition() != yPosition && board.checkBoardPosition(xPosition, yPosition) == null) {
             return true;
         }
