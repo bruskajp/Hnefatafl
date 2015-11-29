@@ -43,7 +43,7 @@ public class TokenMovement {
             board.board[xPosition][yPosition] = token;
             board.board[oldxPosition][oldyPosition] = null;
 
-            if(board.checkBoardPosition(0,0).isKing() || board.checkBoardPosition(0,10).isKing() || board.checkBoardPosition(10,0).isKing() || board.checkBoardPosition(10,10).isKing()){
+            if(board.checkBoardPosition(0,0).isKing() || board.checkBoardPosition(0,12).isKing() || board.checkBoardPosition(12,0).isKing() || board.checkBoardPosition(12,12).isKing()){
                 this.winner = true;
             }
 

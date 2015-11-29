@@ -2,6 +2,7 @@ package com.bruskajp.fisttablets.Game;
 
 import android.util.Log;
 
+import com.bruskajp.fisttablets.artificialintelligence.ComputerPlayer;
 import com.bruskajp.fisttablets.networking.ChatConnection;
 import com.bruskajp.fisttablets.networking.GameConnection;
 import com.bruskajp.fisttablets.networking.LocalChatConnection;
