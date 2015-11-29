@@ -1,5 +1,7 @@
 package com.bruskajp.fisttablets.gameengine;
 
+import android.util.Log;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -75,6 +77,7 @@ public class TokenMovement {
             deletedTokens.add(deletableToken);
             board.removePiece(deletableToken);
         }
+
         if(board.checkBoardPosition(xPosition - 1,yPosition) != null && board.checkBoardPosition(xPosition - 2,yPosition) != null &&
                 board.checkBoardPosition(xPosition,yPosition).getColor() != board.checkBoardPosition(xPosition - 1,yPosition).getColor() &&
                 (board.checkBoardPosition(xPosition - 2,yPosition) == null ||
@@ -85,44 +88,45 @@ public class TokenMovement {
             board.removePiece(deletableToken);
         }
 
-        if(board.checkBoardPosition(xPosition,yPosition+1) != null && board.checkBoardPosition(xPosition,yPosition + 2) != null &&
-                board.checkBoardPosition(xPosition,yPosition).getColor() != board.checkBoardPosition(xPosition,yPosition+1).getColor() &&
+        if(board.checkBoardPosition(xPosition,yPosition + 1) != null && board.checkBoardPosition(xPosition,yPosition + 2) != null &&
+                board.checkBoardPosition(xPosition,yPosition).getColor() != board.checkBoardPosition(xPosition,yPosition + 1).getColor() &&
                 (board.checkBoardPosition(xPosition - 2,yPosition) == null ||
                 board.checkBoardPosition(xPosition,yPosition).getColor() == board.checkBoardPosition(xPosition,yPosition + 2).getColor() &&
-                board.checkBoardPosition(xPosition,yPosition+1).getColor() != Token.TokenType.KING)) {
-            Token deletableToken = board.checkBoardPosition(xPosition,yPosition+1);
+                board.checkBoardPosition(xPosition,yPosition + 1).getColor() != Token.TokenType.KING)) {
+            Token deletableToken = board.checkBoardPosition(xPosition,yPosition + 1);
             deletedTokens.add(deletableToken);
             board.removePiece(deletableToken);
         }
 
-        if(board.checkBoardPosition(xPosition,yPosition-1) != null && board.checkBoardPosition(xPosition,yPosition - 2) != null &&
-                // TODO: JAMES FIX YOUR SHIT BROKE ON THE LINE BELOW WITH NULL REFERENCE
-                board.checkBoardPosition(xPosition,yPosition).getColor() != board.checkBoardPosition(xPosition - 1,yPosition).getColor() &&
-                // TODO: THIS LINE ABOVE ME YEAH THATS RIGHT
+        Log.i("TokenMovement: ", xPosition + "  " + yPosition + "  " + board.checkBoardPosition(xPosition,yPosition));
+
+
+        if(board.checkBoardPosition(xPosition,yPosition - 1) != null && board.checkBoardPosition(xPosition,yPosition - 2) != null &&
+                board.checkBoardPosition(xPosition,yPosition).getColor() != board.checkBoardPosition(xPosition, yPosition - 1).getColor() &&
                 (board.checkBoardPosition(xPosition - 2,yPosition) == null ||
                 board.checkBoardPosition(xPosition,yPosition).getColor() == board.checkBoardPosition(xPosition,yPosition - 2).getColor() &&
-                board.checkBoardPosition(xPosition,yPosition-1).getColor() != Token.TokenType.KING)) {
-            Token deletableToken = board.checkBoardPosition(xPosition,yPosition-1);
+                board.checkBoardPosition(xPosition,yPosition - 1).getColor() != Token.TokenType.KING)) {
+            Token deletableToken = board.checkBoardPosition(xPosition,yPosition - 1);
             deletedTokens.add(deletableToken);
             board.removePiece(deletableToken);
         }
 
 
         //traps kings
-        if(board.checkBoardPosition(xPosition,yPosition-1) != null && board.checkBoardPosition(xPosition,yPosition - 2) != null && board.checkBoardPosition(xPosition + 1,yPosition -1) != null && board.checkBoardPosition(xPosition - 1,yPosition - 1) != null &&
+        if(board.checkBoardPosition(xPosition,yPosition - 1) != null && board.checkBoardPosition(xPosition,yPosition - 2) != null && board.checkBoardPosition(xPosition + 1,yPosition -1) != null && board.checkBoardPosition(xPosition - 1,yPosition - 1) != null &&
                 board.checkBoardPosition(xPosition,yPosition).getColor() == Token.TokenType.BLACK && board.checkBoardPosition(xPosition,yPosition - 2).getColor() == Token.TokenType.BLACK &&
                 board.checkBoardPosition(xPosition + 1,yPosition -1).getColor() == Token.TokenType.BLACK && board.checkBoardPosition(xPosition - 1,yPosition - 1).getColor() == Token.TokenType.BLACK &&
-                board.checkBoardPosition(xPosition,yPosition-1).getColor() == Token.TokenType.KING){
-            Token deletableToken = board.checkBoardPosition(xPosition,yPosition-1);
+                board.checkBoardPosition(xPosition,yPosition - 1).getColor() == Token.TokenType.KING){
+            Token deletableToken = board.checkBoardPosition(xPosition,yPosition - 1);
             deletedTokens.add(deletableToken);
             board.removePiece(deletableToken);
         }
 
-        if(board.checkBoardPosition(xPosition,yPosition+1) != null && board.checkBoardPosition(xPosition,yPosition + 2) != null && board.checkBoardPosition(xPosition+ 1,yPosition + 1) != null && board.checkBoardPosition(xPosition - 1,yPosition + 1) != null &&
+        if(board.checkBoardPosition(xPosition,yPosition + 1) != null && board.checkBoardPosition(xPosition,yPosition + 2) != null && board.checkBoardPosition(xPosition + 1,yPosition + 1) != null && board.checkBoardPosition(xPosition - 1,yPosition + 1) != null &&
                 board.checkBoardPosition(xPosition,yPosition).getColor() == Token.TokenType.BLACK && board.checkBoardPosition(xPosition,yPosition + 2).getColor() == Token.TokenType.BLACK &&
-                board.checkBoardPosition(xPosition+ 1,yPosition + 1).getColor() == Token.TokenType.BLACK && board.checkBoardPosition(xPosition - 1,yPosition + 1).getColor() == Token.TokenType.BLACK &&
-                board.checkBoardPosition(xPosition,yPosition+1).getColor() == Token.TokenType.KING){
-            Token deletableToken = board.checkBoardPosition(xPosition,yPosition+1);
+                board.checkBoardPosition(xPosition + 1,yPosition + 1).getColor() == Token.TokenType.BLACK && board.checkBoardPosition(xPosition - 1,yPosition + 1).getColor() == Token.TokenType.BLACK &&
+                board.checkBoardPosition(xPosition,yPosition + 1).getColor() == Token.TokenType.KING){
+            Token deletableToken = board.checkBoardPosition(xPosition,yPosition + 1);
             deletedTokens.add(deletableToken);
             board.removePiece(deletableToken);
         }
@@ -131,16 +135,16 @@ public class TokenMovement {
                 board.checkBoardPosition(xPosition,yPosition).getColor() == Token.TokenType.BLACK && board.checkBoardPosition(xPosition - 2,yPosition).getColor() == Token.TokenType.BLACK &&
                 board.checkBoardPosition(xPosition - 1,yPosition + 1).getColor() == Token.TokenType.BLACK && board.checkBoardPosition(xPosition - 1,yPosition - 1).getColor() == Token.TokenType.BLACK &&
                 board.checkBoardPosition(xPosition - 1,yPosition).getColor() == Token.TokenType.KING){
-            Token deletableToken = board.checkBoardPosition(xPosition,yPosition+1);
+            Token deletableToken = board.checkBoardPosition(xPosition,yPosition + 1);
             deletedTokens.add(deletableToken);
             board.removePiece(deletableToken);
         }
 
-        if(board.checkBoardPosition(xPosition + 1,yPosition) != null && board.checkBoardPosition(xPosition+2,yPosition) != null && board.checkBoardPosition(xPosition+ 1,yPosition + 1) != null && board.checkBoardPosition(xPosition + 1,yPosition -1) != null &&
+        if(board.checkBoardPosition(xPosition + 1,yPosition) != null && board.checkBoardPosition(xPosition + 2,yPosition) != null && board.checkBoardPosition(xPosition + 1,yPosition + 1) != null && board.checkBoardPosition(xPosition + 1,yPosition -1) != null &&
                 board.checkBoardPosition(xPosition,yPosition).getColor() == Token.TokenType.BLACK && board.checkBoardPosition(xPosition+2,yPosition).getColor() == Token.TokenType.BLACK &&
-                board.checkBoardPosition(xPosition+ 1,yPosition + 1).getColor() == Token.TokenType.BLACK && board.checkBoardPosition(xPosition + 1,yPosition -1).getColor() == Token.TokenType.BLACK &&
+                board.checkBoardPosition(xPosition+ 1,yPosition + 1).getColor() == Token.TokenType.BLACK && board.checkBoardPosition(xPosition + 1,yPosition - 1).getColor() == Token.TokenType.BLACK &&
                 board.checkBoardPosition(xPosition + 1,yPosition).getColor() == Token.TokenType.KING){
-            Token deletableToken = board.checkBoardPosition(xPosition,yPosition+1);
+            Token deletableToken = board.checkBoardPosition(xPosition,yPosition + 1);
             deletedTokens.add(deletableToken);
             board.removePiece(deletableToken);
         }
@@ -168,6 +172,9 @@ public class TokenMovement {
     }
 
     public Move getlastMove(){
+        if(moves.size() == 0){
+            return null;
+        }
         return moves.get(moves.size()-1);
     }
 

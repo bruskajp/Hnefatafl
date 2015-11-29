@@ -86,7 +86,7 @@ public class SimpleAI implements ArtificialIntelligence{
         if(color==Player.PlayerType.BLACK){
             while(!possibleMoves.isEmpty() && addedNodes < width) {
                 // Randomly select the next move to evaluate
-                MovementData nextMove = possibleMoves.remove((int) (Math.random() * possibleMoves.size()));
+                MovementData nextMove = possibleMoves.remove(0);//possibleMoves.remove((int) (Math.random() * possibleMoves.size()));
                 tokenMovement.movePiece(nextMove.tok, nextMove.coordinates.x, nextMove.coordinates.y);
                 // Recurse
                 Node<NodeData> newNode = buildTree(
@@ -118,7 +118,7 @@ public class SimpleAI implements ArtificialIntelligence{
         else{
             while(!possibleMoves.isEmpty() && addedNodes < width) {
                 // Randomly select the next move to evaluate
-                MovementData nextMove = possibleMoves.remove((int)(Math.random() * possibleMoves.size()));
+                MovementData nextMove = possibleMoves.remove(0);//possibleMoves.remove((int)(Math.random() * possibleMoves.size()));
                 tokenMovement.movePiece(nextMove.tok,nextMove.coordinates.x,nextMove.coordinates.y);
                 // Recurse
                 Node<NodeData> newNode = buildTree(
