@@ -8,6 +8,16 @@ import com.bruskajp.fisttablets.player.Player;
  */
 public class SinglePlayerGameConnection extends GameConnection{
 
+    public SinglePlayerGameConnection(Player player){
+        super(player);
+    }
+    public void sendMove(GameConnection gameConnection, Player player1, Player player2){
+
+    }
+
+    public  void receiveMove(Move lastMove, Player player){
+
+    }
 
     public SinglePlayerGameConnection(Player player) {
         super(player);

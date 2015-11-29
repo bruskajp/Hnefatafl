@@ -33,7 +33,7 @@ public class MainMenu extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
-        String value = intent.getStringExtra("this worked");
+        //String value = intent.getStringExtra("this worked");
 
         this.initializeMenu();
     }

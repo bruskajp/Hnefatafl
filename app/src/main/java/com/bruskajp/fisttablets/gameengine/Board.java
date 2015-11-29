@@ -17,7 +17,7 @@ public class Board {
     public boolean winner = false;
     public final static int INITIAL_NUMBER_OF_WHITE_TOKENS = 13;
     public final static int INITIAL_NUMBER_OF_BLACK_TOKENS = 24;
-
+    public final static int BOARD_LENGTH = 13;
     public Board() {
         initializeBoardState();
     }
@@ -28,11 +28,12 @@ public class Board {
     }
 
     public Token checkBoardPosition(int xPosition, int yPosition){
+        if(xPosition<0||yPosition<0||xPosition>=BOARD_LENGTH||yPosition>=BOARD_LENGTH) return null;
         return board[xPosition][yPosition];
     }
 
     private void initializeBoardState() {
-        board = new Token[13][13];
+        board = new Token[BOARD_LENGTH][BOARD_LENGTH];
         remainingPieces = new HashSet<>();
         setBlackBoardPieces();
         setWhiteBoardPieces();
