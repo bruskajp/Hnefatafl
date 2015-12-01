@@ -1,5 +1,7 @@
 package com.bruskajp.fisttablets.player;
 
+import android.util.Log;
+
 import com.bruskajp.fisttablets.gameengine.Board;
 import com.bruskajp.fisttablets.gameengine.Move;
 import com.bruskajp.fisttablets.gameengine.Token;
@@ -66,7 +68,17 @@ public abstract class Player {
     }
 
     public Boolean getWinner(){
-        return playerInformation.getWinner();
+        return tokenMovement.getWinner();
+    }
+
+    public String getPlayerType() {
+        if(playerType.equals(PlayerType.WHITE)) {
+            return "White";
+        }
+        if(playerType.equals(PlayerType.BLACK)) {
+            return "Black";
+        }
+        return null;
     }
 
 }

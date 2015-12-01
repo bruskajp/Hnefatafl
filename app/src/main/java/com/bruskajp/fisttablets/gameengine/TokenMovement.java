@@ -57,11 +57,12 @@ public class TokenMovement {
 
             moves.add(new Move(oldxPosition, oldyPosition, xPosition, yPosition, deletedTokens));
 
-            if(board.checkBoardPosition(0,0) != null && board.checkBoardPosition(0,0).isKing() ||
-                    board.checkBoardPosition(0,edgeIndex) != null && board.checkBoardPosition(0,edgeIndex).isKing() ||
-                    board.checkBoardPosition(edgeIndex,0) != null && board.checkBoardPosition(edgeIndex,0).isKing() ||
-                    board.checkBoardPosition(edgeIndex,edgeIndex) != null && board.checkBoardPosition(edgeIndex,edgeIndex).isKing()){
+            if((board.checkBoardPosition(0,0) != null && board.checkBoardPosition(0,0).isKing()) ||
+                    (board.checkBoardPosition(0,edgeIndex) != null && board.checkBoardPosition(0,edgeIndex).isKing()) ||
+                    (board.checkBoardPosition(edgeIndex,0) != null && board.checkBoardPosition(edgeIndex,0).isKing()) ||
+                    (board.checkBoardPosition(edgeIndex,edgeIndex) != null && board.checkBoardPosition(edgeIndex,edgeIndex).isKing())){
                 this.winner = true;
+                //Log.e("TokenMovement", "\n\n WINNER \n\n" );
             }
 
             if(board.getRemainingPieces().size()>board.MAX_NUMBER_OF_TOKENS){
@@ -182,6 +183,7 @@ public class TokenMovement {
                 for(Token token : lastMove.getDeletedTokens()){
                     board.board[token.getxPosition()][token.getyPosition()] = token;
                     board.getRemainingPieces().add(token);
+                    Log.d("TokenMovement", token.xPosition + "  " + token.yPosition + "  " + token.getColor() + "\n");
                 }
             }
             moves.remove(moves.size()-1);
@@ -199,4 +201,7 @@ public class TokenMovement {
         return moves.get(moves.size()-1);
     }
 
+    public boolean getWinner() {
+        return this.winner;
+    }
 }

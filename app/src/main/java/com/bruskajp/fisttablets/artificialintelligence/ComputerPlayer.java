@@ -26,6 +26,11 @@ public class ComputerPlayer extends Player{
     @Override
     public void takeTurn() {
         makeNextMove();
+
+        if(!board.checkBoardPosition(7,7).isKing()){
+            Log.e(LOG_TAG, "KING moooooooooved");
+        }
+
     }
 
     public void initializeComputerPlayer() {
@@ -41,5 +46,8 @@ public class ComputerPlayer extends Player{
         Log.i(LOG_TAG,"Moving token from "+nextMove.tok.getxPosition()+","+nextMove.tok.getyPosition()
                 +" to "+nextMove.coordinates.x+","+nextMove.coordinates.y);
         movePiece(nextMove.tok, nextMove.coordinates.x, nextMove.coordinates.y);
+        if(this.getWinner() == true){
+            Log.i(LOG_TAG, "\n\n WINNER \n\n");
+        }
     }
 }
