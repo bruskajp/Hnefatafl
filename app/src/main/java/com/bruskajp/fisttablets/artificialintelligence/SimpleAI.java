@@ -1,5 +1,7 @@
 package com.bruskajp.fisttablets.artificialintelligence;
 
+import android.util.Log;
+
 import com.bruskajp.fisttablets.gameengine.Board;
 import com.bruskajp.fisttablets.gameengine.Token;
 import com.bruskajp.fisttablets.gameengine.TokenMovement;
@@ -61,6 +63,9 @@ public class SimpleAI implements ArtificialIntelligence{
         // Build the tree
         buildTree(depth,width,Double.MIN_VALUE,Double.MAX_VALUE,color,root);
         // Return a random child (buildTree strips all suboptimal moves from the tree)
+        if(root.getChildren().isEmpty()){
+            Log.e("SimpleAI","ERROR: children empty");
+        }
         return root.getChildren()
                 .get((int)(Math.random() * root.getChildren().size()))
                 .getData()
@@ -81,12 +86,23 @@ public class SimpleAI implements ArtificialIntelligence{
             return root;
         };
         List<MovementData> possibleMoves = cpOptions.getPlayerOptions(color);
+        if(possibleMoves.isEmpty()){
+            cpOptions.getPlayerOptions(color);
+            Log.e("SimpleAI","ERROR: Possible moves is empty");
+        }
         // Black wants the highest possible eval
         int addedNodes = 0;
+        for(MovementData md : possibleMoves){
+            if(md.tok.getxPosition()==0&&md.tok.getyPosition()==12){
+                System.out.println("found");
+            }
+        }
         if(color==Player.PlayerType.BLACK){
             while(!possibleMoves.isEmpty() && addedNodes < width) {
                 // Randomly select the next move to evaluate
                 MovementData nextMove = possibleMoves.remove(0);//possibleMoves.remove((int) (Math.random() * possibleMoves.size()));
+                int xCoord = nextMove.tok.getxPosition();
+                int yCoord = nextMove.tok.getyPosition();
                 tokenMovement.movePiece(nextMove.tok, nextMove.coordinates.x, nextMove.coordinates.y);
                 // Recurse
                 Node<NodeData> newNode = buildTree(
@@ -110,6 +126,11 @@ public class SimpleAI implements ArtificialIntelligence{
                     root.addChild(newNode);
                 }
                 tokenMovement.undo();
+                if(nextMove.tok.getxPosition()!=xCoord || nextMove.tok.getyPosition()!=yCoord){
+                    Log.e("SimpleAI", "ERROR: Undo not working correctly: Token at (x,y) ("
+                            +nextMove.tok.getxPosition()+","+ nextMove.tok.getyPosition()+") Should be at (x,y) ("
+                            +xCoord+","+yCoord+").");
+                }
                 // Return if beta closes in on alpha
                 if(beta<=alpha) return root;
                 width++;
@@ -119,6 +140,8 @@ public class SimpleAI implements ArtificialIntelligence{
             while(!possibleMoves.isEmpty() && addedNodes < width) {
                 // Randomly select the next move to evaluate
                 MovementData nextMove = possibleMoves.remove(0);//possibleMoves.remove((int)(Math.random() * possibleMoves.size()));
+                int xCoord = nextMove.tok.getxPosition();
+                int yCoord = nextMove.tok.getyPosition();
                 tokenMovement.movePiece(nextMove.tok,nextMove.coordinates.x,nextMove.coordinates.y);
                 // Recurse
                 Node<NodeData> newNode = buildTree(
@@ -141,6 +164,11 @@ public class SimpleAI implements ArtificialIntelligence{
                     root.addChild(newNode);
                 }
                 tokenMovement.undo();
+                if(nextMove.tok.getxPosition()!=xCoord || nextMove.tok.getyPosition()!=yCoord){
+                    Log.e("SimpleAI", "ERROR: Undo not working correctly: Token at (x,y) ("
+                            +nextMove.tok.getxPosition()+","+ nextMove.tok.getyPosition()+") Should be at (x,y) ("
+                            +xCoord+","+yCoord+").");
+                }
                 // Return if beta closes in on alpha
                 if(beta<=alpha) return root;
                 width++;
