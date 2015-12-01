@@ -34,7 +34,15 @@ public class TokenMovement {
         }
     }
 
-    public Boolean movePiece(Token token, int xPosition, int yPosition){
+    public boolean movePiece(int oldXPosition, int oldYPosition, int newXPosition, int newYPosition){
+        Token tok;
+        if((tok=board.checkBoardPosition(oldXPosition,oldYPosition))!=null){
+            return movePiece(tok,newXPosition,newYPosition);
+        }
+        return false;
+    }
+
+    public boolean movePiece(Token token, int xPosition, int yPosition){
         if (isMoveValid(token, xPosition, yPosition)) {
             int oldxPosition = token.getxPosition();
             int oldyPosition = token.getyPosition();
@@ -101,7 +109,7 @@ public class TokenMovement {
             board.removePiece(deletableToken);
         }
 
-        Log.i("TokenMovement: ", xPosition + "  " + yPosition + "  " + board.checkBoardPosition(xPosition,yPosition));
+        //Log.i("TokenMovement: ", xPosition + "  " + yPosition + "  " + board.checkBoardPosition(xPosition,yPosition));
 
 
         if(board.checkBoardPosition(xPosition,yPosition - 1) != null && board.checkBoardPosition(xPosition,yPosition - 2) != null &&

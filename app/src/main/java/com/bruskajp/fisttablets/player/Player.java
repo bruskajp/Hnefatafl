@@ -39,6 +39,12 @@ public abstract class Player {
 
     public abstract void takeTurn();
 
+    public boolean movePiece(int oldXPosition, int oldYPosition, int newXPosition, int newYPosition){
+        if(tokenMovement.movePiece(oldXPosition,oldYPosition,newXPosition,newYPosition)){
+            return true;
+        }
+        return false;
+    }
     public boolean movePiece(Token token, int xPosition, int yPosition){
         if (tokenMovement.movePiece(token, xPosition, yPosition)){
             return true;

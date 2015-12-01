@@ -15,8 +15,10 @@ public class SimpleAI implements ArtificialIntelligence{
     Board board;
     TokenMovement tokenMovement;
     Player.PlayerType color;
-    public static final int SEARCH_DEPTH = 1;
+    public static final int SEARCH_DEPTH = 0;
     public static final int SEARCH_WIDTH = 300;
+    private final Double INFINITY = Double.POSITIVE_INFINITY;
+    private final Double NEGATIVE_INFINITY = Double.NEGATIVE_INFINITY;
     Node<NodeData> root;
     protected class NodeData implements Comparable{
         MovementData movementData;
@@ -59,9 +61,9 @@ public class SimpleAI implements ArtificialIntelligence{
     protected MovementData minMaxSearch(int depth, int width){
         // Initialize root of tree
         root = new Node<>(
-                new NodeData(color==Player.PlayerType.BLACK ? Double.MIN_VALUE : Double.MAX_VALUE));
+                new NodeData(color==Player.PlayerType.BLACK ? NEGATIVE_INFINITY:INFINITY));
         // Build the tree
-        buildTree(depth,width,Double.MIN_VALUE,Double.MAX_VALUE,color,root);
+        buildTree(depth,width,NEGATIVE_INFINITY,INFINITY,color,root);
         // Return a random child (buildTree strips all suboptimal moves from the tree)
         if(root.getChildren().isEmpty()){
             Log.e("SimpleAI","ERROR: children empty");
@@ -132,6 +134,9 @@ public class SimpleAI implements ArtificialIntelligence{
                             +nextMove.tok.getxPosition()+","+ nextMove.tok.getyPosition()+") Should be at (x,y) ("
                             +xCoord+","+yCoord+").");
                 }
+                if(board.getRemainingPieces().size()>board.MAX_NUMBER_OF_TOKENS){
+                    Log.e("SimpleAI", "ERROR: Somehow gained an extra token.");
+                }
                 // Return if beta closes in on alpha
                 if(beta<=alpha) return root;
                 addedNodes++;
@@ -169,6 +174,10 @@ public class SimpleAI implements ArtificialIntelligence{
                     Log.e("SimpleAI", "ERROR: Undo not working correctly: Token at (x,y) ("
                             +nextMove.tok.getxPosition()+","+ nextMove.tok.getyPosition()+") Should be at (x,y) ("
                             +xCoord+","+yCoord+").");
+                }
+
+                if(board.getRemainingPieces().size()>board.MAX_NUMBER_OF_TOKENS){
+                    Log.e("SimpleAI", "ERROR: Somehow gained an extra token.");
                 }
                 // Return if beta closes in on alpha
                 if(beta<=alpha) return root;

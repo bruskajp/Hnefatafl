@@ -38,6 +38,8 @@ public class ComputerPlayer extends Player{
     public void makeNextMove(){
         MovementData nextMove = ai.getNextMove();
         //this.tokenMovement.movePiece(nextMove.tok, nextMove.coordinates.x, nextMove.coordinates.y);
+        Log.i(LOG_TAG,"Moving token from "+nextMove.tok.getxPosition()+","+nextMove.tok.getyPosition()
+                +" to "+nextMove.coordinates.x+","+nextMove.coordinates.y);
         movePiece(nextMove.tok, nextMove.coordinates.x, nextMove.coordinates.y);
     }
 }

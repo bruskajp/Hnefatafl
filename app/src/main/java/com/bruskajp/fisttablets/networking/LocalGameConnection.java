@@ -23,6 +23,6 @@ public class LocalGameConnection extends GameConnection{
     }
 
     public void receiveMove(Move lastMove, Player player) {
-        player.movePiece(new Token(lastMove.getPreviousX(), lastMove.getPreviousY(), null), lastMove.getNewX(), lastMove.getNewY()); //can use null because it is not used
+        player.movePiece(lastMove.getPreviousX(), lastMove.getPreviousY(), lastMove.getNewX(), lastMove.getNewY()); //can use null because it is not used
     }
 }
