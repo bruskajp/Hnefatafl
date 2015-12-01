@@ -16,7 +16,8 @@ public class Board {
     private final static String LOG_TAG = "Board";
     public boolean winner = false;
     public final static int INITIAL_NUMBER_OF_WHITE_TOKENS = 13;
-    public final static int INITIAL_NUMBER_OF_BLACK_TOKENS = 24;
+    public final static int INITIAL_NUMBER_OF_BLACK_TOKENS = 20;
+    public final static int MAX_NUMBER_OF_TOKENS = INITIAL_NUMBER_OF_BLACK_TOKENS+INITIAL_NUMBER_OF_WHITE_TOKENS;
     public final static int BOARD_LENGTH = 13;
     public Board() {
         initializeBoardState();

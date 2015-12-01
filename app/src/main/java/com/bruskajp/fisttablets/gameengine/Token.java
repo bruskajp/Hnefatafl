@@ -7,7 +7,7 @@ public class Token {
 
     public int xPosition = -1;
     public int yPosition = -1;
-    TokenType tokenType;
+    private TokenType tokenType;
 
     public static enum TokenType{
         BLACK,WHITE,KING;

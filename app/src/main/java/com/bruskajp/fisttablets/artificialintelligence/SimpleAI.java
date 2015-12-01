@@ -81,7 +81,8 @@ public class SimpleAI implements ArtificialIntelligence{
      * @return A tree whose children contain the optimal move to take.
      */
     private Node<NodeData> buildTree(int depth, int width, double alpha, double beta, Player.PlayerType color, Node<NodeData> root){
-        if(depth<0){
+
+        if(depth<0||width<0){
             root.getData().evaluation = evaluate(board);
             return root;
         };
@@ -133,7 +134,7 @@ public class SimpleAI implements ArtificialIntelligence{
                 }
                 // Return if beta closes in on alpha
                 if(beta<=alpha) return root;
-                width++;
+                addedNodes++;
             }
         }
         else{
@@ -171,7 +172,7 @@ public class SimpleAI implements ArtificialIntelligence{
                 }
                 // Return if beta closes in on alpha
                 if(beta<=alpha) return root;
-                width++;
+                addedNodes++;
             }
         }
         return root;

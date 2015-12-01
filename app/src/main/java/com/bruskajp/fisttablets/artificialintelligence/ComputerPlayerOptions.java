@@ -1,5 +1,7 @@
 package com.bruskajp.fisttablets.artificialintelligence;
 
+import android.util.Log;
+
 import com.bruskajp.fisttablets.gameengine.Board;
 import com.bruskajp.fisttablets.gameengine.Token;
 import com.bruskajp.fisttablets.player.Player;
@@ -30,6 +32,9 @@ public class ComputerPlayerOptions{
             if(tok.getColor()==
                     (color == Player.PlayerType.WHITE ? Token.TokenType.WHITE : Token.TokenType.BLACK)){
                 list.addAll(getTokenOptions(tok));
+            }
+            if(tok.getTokenType()==null) {
+                Log.e("ComputerPlayerOptions", "Null token type");
             }
         }
         return list;
