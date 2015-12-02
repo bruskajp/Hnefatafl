@@ -70,22 +70,22 @@ public class ComputerPlayerOptions{
         int y = tok.getyPosition();
         switch(dir){
             case UP:
-                while(tokenMovement.isMoveValid(tok, x, --y)){
+                while(tokenMovement.isMoveValid(tok, x, y=y-1)){
                     list.add(new MovementData(tok, new PositionPair(x,y)));
                 }
                 break;
             case DOWN:
-                while(tokenMovement.isMoveValid(tok, x, ++y)){
+                while(tokenMovement.isMoveValid(tok, x, y=y+1)){
                     list.add(new MovementData(tok, new PositionPair(x,y)));
                 }
                 break;
             case LEFT:
-                while(tokenMovement.isMoveValid(tok, --x, y)){
+                while(tokenMovement.isMoveValid(tok, x=x-1, y)){
                     list.add(new MovementData(tok, new PositionPair(x,y)));
                 }
                 break;
             case RIGHT:
-                while(tokenMovement.isMoveValid(tok,++x,y)){
+                while(tokenMovement.isMoveValid(tok,x=x+1,y)){
                     list.add(new MovementData(tok, new PositionPair(x,y)));
                 }
                 break;

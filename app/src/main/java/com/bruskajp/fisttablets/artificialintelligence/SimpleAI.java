@@ -15,7 +15,7 @@ public class SimpleAI implements ArtificialIntelligence{
     Board board;
     TokenMovement tokenMovement;
     Player.PlayerType color;
-    public static final int SEARCH_DEPTH = 0;
+    public static final int SEARCH_DEPTH = 2;
     public static final int SEARCH_WIDTH = 300;
     private final Double INFINITY = Double.POSITIVE_INFINITY;
     private final Double NEGATIVE_INFINITY = Double.NEGATIVE_INFINITY;
@@ -101,7 +101,10 @@ public class SimpleAI implements ArtificialIntelligence{
                 MovementData nextMove = possibleMoves.remove(0);//possibleMoves.remove((int) (Math.random() * possibleMoves.size()));
                 int xCoord = nextMove.tok.getxPosition();
                 int yCoord = nextMove.tok.getyPosition();
-                tokenMovement.movePiece(nextMove.tok, nextMove.coordinates.x, nextMove.coordinates.y);
+                if(!tokenMovement.movePiece(nextMove.tok, nextMove.coordinates.x, nextMove.coordinates.y)){
+                    Log.e("SimpleAI","Doing an invalid movement from ("+nextMove.tok.getxPosition()+","+nextMove.tok.getyPosition()+
+                    ") to ("+nextMove.coordinates.x+","+nextMove.coordinates.y+")");
+                }
                 // Recurse
                 Node<NodeData> newNode = buildTree(
                         depth-1,
@@ -143,7 +146,10 @@ public class SimpleAI implements ArtificialIntelligence{
                 MovementData nextMove = possibleMoves.remove(0);//possibleMoves.remove((int)(Math.random() * possibleMoves.size()));
                 int xCoord = nextMove.tok.getxPosition();
                 int yCoord = nextMove.tok.getyPosition();
-                tokenMovement.movePiece(nextMove.tok,nextMove.coordinates.x,nextMove.coordinates.y);
+                if(!tokenMovement.movePiece(nextMove.tok, nextMove.coordinates.x, nextMove.coordinates.y)){
+                    Log.e("SimpleAI","Doing an invalid movement from ("+nextMove.tok.getxPosition()+","+nextMove.tok.getyPosition()+
+                            ") to ("+nextMove.coordinates.x+","+nextMove.coordinates.y+")");
+                }
                 // Recurse
                 Node<NodeData> newNode = buildTree(
                         depth - 1,
