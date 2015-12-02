@@ -26,11 +26,6 @@ public class ComputerPlayer extends Player{
     @Override
     public void takeTurn() {
         makeNextMove();
-
-        if(!checkBoardPosition(7,7).isKing()){
-            Log.e(LOG_TAG, "KING moooooooooved");
-        }
-
     }
 
     public void initializeComputerPlayer() {

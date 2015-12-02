@@ -57,6 +57,7 @@ public class TokenMovement {
 
             moves.add(new Move(oldxPosition, oldyPosition, xPosition, yPosition, deletedTokens));
 
+            // check if the king is in a corner. If it is, set winner to true;
             if((board.checkBoardPosition(0,0) != null && board.checkBoardPosition(0,0).isKing()) ||
                     (board.checkBoardPosition(0,edgeIndex) != null && board.checkBoardPosition(0,edgeIndex).isKing()) ||
                     (board.checkBoardPosition(edgeIndex,0) != null && board.checkBoardPosition(edgeIndex,0).isKing()) ||
@@ -68,7 +69,6 @@ public class TokenMovement {
             if(board.getRemainingPieces().size()>board.MAX_NUMBER_OF_TOKENS){
                 Log.e("TokenMovement", "ERROR: Somehow gained an extra token.");
             }
-            // check if the king is in a corner. If it is, set winner to true;
 
             return true;
         } else {
@@ -190,6 +190,10 @@ public class TokenMovement {
 
             if(board.getRemainingPieces().size()>board.MAX_NUMBER_OF_TOKENS){
                 Log.e("TokenMovement", "ERROR: Somehow gained an extra token.");
+            }
+
+            if(this.winner == true){
+                this.winner = false;
             }
         }
     }
