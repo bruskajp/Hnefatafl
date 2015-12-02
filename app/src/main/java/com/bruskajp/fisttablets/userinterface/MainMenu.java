@@ -81,7 +81,7 @@ public class MainMenu extends Activity{
             @Override
             public void onClick(View v) {
 
-                Game SinglePlayerGame = new SinglePlayerGame();
+                //Game SinglePlayerGame = new SinglePlayerGame();
 
                 Intent myIntent = new Intent(v.getContext(), GameBoard.class);
                 startActivityForResult(myIntent, 0);

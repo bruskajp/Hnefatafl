@@ -246,13 +246,12 @@ public class GameBoard extends Activity{
 
 
     public void initializeMenu() {
-        final Random rand = new Random();
+
         kingPiece.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.i(LOG_TAG, "king pressed");
-                kingPiece.animate().x(rand.nextInt(board.getWidth())).setDuration(500);
-                kingPiece.animate().y(rand.nextInt(board.getWidth())).setDuration(500);
+                movePiece(kingPiece);
             }
         });
 
@@ -260,7 +259,7 @@ public class GameBoard extends Activity{
             @Override
             public void onClick(View v){
                 Log.i(LOG_TAG, "black1");
-
+                movePiece(black1);
             }
         });
 
@@ -268,6 +267,7 @@ public class GameBoard extends Activity{
             @Override
             public void onClick(View v){
                 Log.i(LOG_TAG, "black2");
+                movePiece(black2);
 
             }
         });
@@ -276,6 +276,7 @@ public class GameBoard extends Activity{
             @Override
             public void onClick(View v){
                 Log.i(LOG_TAG, "black3");
+                movePiece(black3);
 
             }
         });
@@ -284,6 +285,7 @@ public class GameBoard extends Activity{
             @Override
             public void onClick(View v){
                 Log.i(LOG_TAG, "black4");
+                movePiece(black4);
 
             }
         });
@@ -292,6 +294,7 @@ public class GameBoard extends Activity{
             @Override
             public void onClick(View v){
                 Log.i(LOG_TAG, "black5");
+                movePiece(black5);
 
             }
         });
@@ -300,6 +303,7 @@ public class GameBoard extends Activity{
             @Override
             public void onClick(View v){
                 Log.i(LOG_TAG, "black6");
+                movePiece(black6);
 
             }
         });
@@ -308,6 +312,7 @@ public class GameBoard extends Activity{
             @Override
             public void onClick(View v){
                 Log.i(LOG_TAG, "black7");
+                movePiece(black7);
             }
         });
 
@@ -315,6 +320,7 @@ public class GameBoard extends Activity{
             @Override
             public void onClick(View v){
                 Log.i(LOG_TAG, "black8");
+                movePiece(black8);
             }
         });
 
@@ -322,6 +328,7 @@ public class GameBoard extends Activity{
             @Override
             public void onClick(View v){
                 Log.i(LOG_TAG, "black9");
+                movePiece(black9);
             }
         });
 
@@ -329,6 +336,7 @@ public class GameBoard extends Activity{
             @Override
             public void onClick(View v){
                 Log.i(LOG_TAG, "black10");
+                movePiece(black10);
             }
         });
 
@@ -336,6 +344,7 @@ public class GameBoard extends Activity{
             @Override
             public void onClick(View v){
                 Log.i(LOG_TAG, "black11");
+                movePiece(black11);
             }
         });
 
@@ -343,6 +352,7 @@ public class GameBoard extends Activity{
             @Override
             public void onClick(View v){
                 Log.i(LOG_TAG, "black12");
+                movePiece(black12);
             }
         });
 
@@ -350,6 +360,7 @@ public class GameBoard extends Activity{
             @Override
             public void onClick(View v){
                 Log.i(LOG_TAG, "black13");
+                movePiece(black13);
             }
         });
 
@@ -357,6 +368,7 @@ public class GameBoard extends Activity{
             @Override
             public void onClick(View v){
                 Log.i(LOG_TAG, "black14");
+                movePiece(black14);
             }
         });
 
@@ -364,27 +376,23 @@ public class GameBoard extends Activity{
             @Override
             public void onClick(View v){
                 Log.i(LOG_TAG, "black15");
+                movePiece(black15);
             }
         });
 
         black16.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Log.i(LOG_TAG, "black15");
+                Log.i(LOG_TAG, "black16");
+                movePiece(black16);
             }
         });
 
         black17.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Log.i(LOG_TAG, "black16");
-            }
-        });
-
-        black18.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
                 Log.i(LOG_TAG, "black17");
+                movePiece(black17);
             }
         });
 
@@ -392,6 +400,7 @@ public class GameBoard extends Activity{
             @Override
             public void onClick(View v){
                 Log.i(LOG_TAG, "black18");
+                movePiece(black18);
             }
         });
 
@@ -399,6 +408,7 @@ public class GameBoard extends Activity{
             @Override
             public void onClick(View v){
                 Log.i(LOG_TAG, "black19");
+                movePiece(black19);
             }
         });
 
@@ -406,6 +416,7 @@ public class GameBoard extends Activity{
             @Override
             public void onClick(View v){
                 Log.i(LOG_TAG, "black20");
+                movePiece(black20);
             }
         });
 
@@ -413,6 +424,7 @@ public class GameBoard extends Activity{
             @Override
             public void onClick(View v){
                 Log.i(LOG_TAG, "black21");
+                movePiece(black21);
             }
         });
 
@@ -420,6 +432,7 @@ public class GameBoard extends Activity{
             @Override
             public void onClick(View v){
                 Log.i(LOG_TAG, "black22");
+                movePiece(black22);
             }
         });
 
@@ -427,6 +440,7 @@ public class GameBoard extends Activity{
             @Override
             public void onClick(View v){
                 Log.i(LOG_TAG, "black23");
+                movePiece(black23);
             }
         });
 
@@ -434,6 +448,7 @@ public class GameBoard extends Activity{
             @Override
             public void onClick(View v){
                 Log.i(LOG_TAG, "black24");
+                movePiece(black24);
             }
         });
 
@@ -441,6 +456,7 @@ public class GameBoard extends Activity{
             @Override
             public void onClick(View v){
                 Log.i(LOG_TAG, "white1");
+                movePiece(white1);
             }
         });
 
@@ -448,6 +464,7 @@ public class GameBoard extends Activity{
             @Override
             public void onClick(View v){
                 Log.i(LOG_TAG, "white2");
+                movePiece(white2);
             }
         });
 
@@ -455,6 +472,7 @@ public class GameBoard extends Activity{
             @Override
             public void onClick(View v){
                 Log.i(LOG_TAG, "white3");
+                movePiece(white3);
             }
         });
 
@@ -462,6 +480,7 @@ public class GameBoard extends Activity{
             @Override
             public void onClick(View v){
                 Log.i(LOG_TAG, "white4");
+                movePiece(white4);
             }
         });
 
@@ -469,6 +488,7 @@ public class GameBoard extends Activity{
             @Override
             public void onClick(View v){
                 Log.i(LOG_TAG, "white5");
+                movePiece(white5);
             }
         });
 
@@ -476,6 +496,7 @@ public class GameBoard extends Activity{
             @Override
             public void onClick(View v){
                 Log.i(LOG_TAG, "white6");
+                movePiece(white6);
             }
         });
 
@@ -484,6 +505,7 @@ public class GameBoard extends Activity{
             @Override
             public void onClick(View v){
                 Log.i(LOG_TAG, "white7");
+                movePiece(white7);
             }
         });
 
@@ -491,6 +513,7 @@ public class GameBoard extends Activity{
             @Override
             public void onClick(View v){
                 Log.i(LOG_TAG, "white8");
+                movePiece(white8);
             }
         });
 
@@ -499,6 +522,7 @@ public class GameBoard extends Activity{
             @Override
             public void onClick(View v){
                 Log.i(LOG_TAG, "white9");
+                movePiece(white9);
             }
         });
 
@@ -506,6 +530,7 @@ public class GameBoard extends Activity{
             @Override
             public void onClick(View v){
                 Log.i(LOG_TAG, "white10");
+                movePiece(white10);
             }
         });
 
@@ -513,6 +538,7 @@ public class GameBoard extends Activity{
             @Override
             public void onClick(View v){
                 Log.i(LOG_TAG, "white11");
+                movePiece(white11);
             }
         });
 
@@ -520,6 +546,7 @@ public class GameBoard extends Activity{
             @Override
             public void onClick(View v){
                 Log.i(LOG_TAG, "white12");
+                movePiece(white12);
             }
         });
 
@@ -533,5 +560,12 @@ public class GameBoard extends Activity{
                 finish();
             }
         });
+    }
+    public void movePiece(ImageView move){
+        final Random rand = new Random();
+        move.animate().x(rand.nextInt(board.getWidth())).setDuration(500);
+        move.animate().y(rand.nextInt(board.getWidth())).setDuration(500);
+
+
     }
 }
