@@ -35,13 +35,20 @@ public class SinglePlayerGame extends Game{
         while(!player1.getWinner() && !player2.getWinner()){
             player1.takeTurn();
             gameConnection1.sendMove(gameConnection2, player1, player2);
+            if(player1.getWinner() || player2.getWinner()) break;
             player2.takeTurn();
             gameConnection2.sendMove(gameConnection1, player2, player1);
         }
 
-        Log.i("SinglePlayerGame", "The winner is " + player1.getPlayerType() + " not " + player2.getPlayerType() );
+        // TODO: Fix this
+
+        if(player1.getWinner()){
+            Log.i("SinglePlayerGame", "The winner is " + player1.getPlayerType() + " not " + player2.getPlayerType() );
+        }else{
+            Log.i("SinglePlayerGame", "The winner is " + player2.getPlayerType() + " not " + player1.getPlayerType() );
+        }
+
 
         // Do winning stuff
-
     }
 }
