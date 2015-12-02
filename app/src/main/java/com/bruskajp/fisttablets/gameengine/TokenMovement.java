@@ -84,10 +84,11 @@ public class TokenMovement {
                 board.checkBoardPosition(xPosition,yPosition).getColor() != board.checkBoardPosition(xPosition + 1,yPosition).getColor() &&
                 (board.checkBoardPosition(xPosition + 2,yPosition)== null ||
                         board.checkBoardPosition(xPosition,yPosition).getColor() == board.checkBoardPosition(xPosition + 2,yPosition).getColor() &&
-                                !board.checkBoardPosition(xPosition + 1,yPosition).isKing())) {
+                        !board.checkBoardPosition(xPosition + 1,yPosition).isKing())) {
             Token deletableToken = board.checkBoardPosition(xPosition + 1,yPosition);
             deletedTokens.add(deletableToken);
             board.removePiece(deletableToken);
+            Log.i("TokenMovement", "Fuck this");
         }
 
         if(board.checkBoardPosition(xPosition - 1,yPosition) != null && board.checkBoardPosition(xPosition - 2,yPosition) != null &&
@@ -98,6 +99,7 @@ public class TokenMovement {
             Token deletableToken = board.checkBoardPosition(xPosition - 1,yPosition);
             deletedTokens.add(deletableToken);
             board.removePiece(deletableToken);
+            Log.i("TokenMovement", "Fuck this 2");
         }
 
         if(board.checkBoardPosition(xPosition,yPosition + 1) != null && board.checkBoardPosition(xPosition,yPosition + 2) != null &&
@@ -108,6 +110,7 @@ public class TokenMovement {
             Token deletableToken = board.checkBoardPosition(xPosition,yPosition + 1);
             deletedTokens.add(deletableToken);
             board.removePiece(deletableToken);
+            Log.i("TokenMovement", "Fuck this 3");
         }
 
         //Log.i("TokenMovement: ", xPosition + "  " + yPosition + "  " + board.checkBoardPosition(xPosition,yPosition));
@@ -121,6 +124,7 @@ public class TokenMovement {
             Token deletableToken = board.checkBoardPosition(xPosition,yPosition - 1);
             deletedTokens.add(deletableToken);
             board.removePiece(deletableToken);
+            Log.i("TokenMovement", "Fuck this 4");
         }
 
 
@@ -132,6 +136,7 @@ public class TokenMovement {
             Token deletableToken = board.checkBoardPosition(xPosition,yPosition - 1);
             deletedTokens.add(deletableToken);
             board.removePiece(deletableToken);
+            Log.i("TokenMovement", "Damn this 1");
         }
 
         if(board.checkBoardPosition(xPosition,yPosition + 1) != null && board.checkBoardPosition(xPosition,yPosition + 2) != null && board.checkBoardPosition(xPosition + 1,yPosition + 1) != null && board.checkBoardPosition(xPosition - 1,yPosition + 1) != null &&
@@ -141,6 +146,7 @@ public class TokenMovement {
             Token deletableToken = board.checkBoardPosition(xPosition,yPosition + 1);
             deletedTokens.add(deletableToken);
             board.removePiece(deletableToken);
+            Log.i("TokenMovement", "Damn this 2");
         }
 
         if(board.checkBoardPosition(xPosition - 1,yPosition) != null && board.checkBoardPosition(xPosition - 2,yPosition) != null && board.checkBoardPosition(xPosition - 1,yPosition + 1) != null && board.checkBoardPosition(xPosition - 1,yPosition - 1) != null &&
@@ -150,6 +156,7 @@ public class TokenMovement {
             Token deletableToken = board.checkBoardPosition(xPosition - 1,yPosition);
             deletedTokens.add(deletableToken);
             board.removePiece(deletableToken);
+            Log.i("TokenMovement", "Damn this 3");
         }
 
         if(board.checkBoardPosition(xPosition + 1,yPosition) != null && board.checkBoardPosition(xPosition + 2,yPosition) != null && board.checkBoardPosition(xPosition + 1,yPosition + 1) != null && board.checkBoardPosition(xPosition + 1,yPosition -1) != null &&
@@ -159,6 +166,7 @@ public class TokenMovement {
             Token deletableToken = board.checkBoardPosition(xPosition +1,yPosition);
             deletedTokens.add(deletableToken);
             board.removePiece(deletableToken);
+            Log.i("TokenMovement", "Damn this 4");
         }
         if(board.getRemainingPieces().size()>board.MAX_NUMBER_OF_TOKENS){
             Log.e("TokenMovement", "ERROR: Somehow gained an extra token.");

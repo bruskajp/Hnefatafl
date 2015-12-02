@@ -39,6 +39,8 @@ public class SinglePlayerGame extends Game{
             gameConnection2.sendMove(gameConnection1, player2, player1);
         }
 
+        // TODO: Fix this
+
         if(player1.getWinner()){
             Log.i("SinglePlayerGame", "The winner is " + player1.getPlayerType() + " not " + player2.getPlayerType() );
         }else{
@@ -47,6 +49,5 @@ public class SinglePlayerGame extends Game{
 
 
         // Do winning stuff
-
     }
 }
