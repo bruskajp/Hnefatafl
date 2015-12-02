@@ -39,7 +39,7 @@ public class SinglePlayerGame extends Game{
             gameConnection2.sendMove(gameConnection1, player2, player1);
         }
 
-        Log.i("SinglePlayerGame", "The winner is" + player1.getPlayerType() + " not " + player2.getPlayerType() );
+        Log.i("SinglePlayerGame", "The winner is " + player1.getPlayerType() + " not " + player2.getPlayerType() );
 
         // Do winning stuff
 

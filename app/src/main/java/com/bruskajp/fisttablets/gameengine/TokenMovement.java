@@ -183,7 +183,7 @@ public class TokenMovement {
                 for(Token token : lastMove.getDeletedTokens()){
                     board.board[token.getxPosition()][token.getyPosition()] = token;
                     board.getRemainingPieces().add(token);
-                    Log.d("TokenMovement", token.xPosition + "  " + token.yPosition + "  " + token.getColor() + "\n");
+                    //Log.d("TokenMovement", token.xPosition + "  " + token.yPosition + "  " + token.getColor() + "\n");
                 }
             }
             moves.remove(moves.size()-1);

@@ -27,14 +27,14 @@ public class ComputerPlayer extends Player{
     public void takeTurn() {
         makeNextMove();
 
-        if(!board.checkBoardPosition(7,7).isKing()){
+        if(!checkBoardPosition(7,7).isKing()){
             Log.e(LOG_TAG, "KING moooooooooved");
         }
 
     }
 
     public void initializeComputerPlayer() {
-        Log.i(LOG_TAG, "This is how to log things to console");
+        //Log.i(LOG_TAG, "This is how to log things to console");
     }
 
     /***
@@ -42,8 +42,7 @@ public class ComputerPlayer extends Player{
      */
     public void makeNextMove(){
         MovementData nextMove = ai.getNextMove();
-        //this.tokenMovement.movePiece(nextMove.tok, nextMove.coordinates.x, nextMove.coordinates.y);
-        Log.i(LOG_TAG,"Moving token from "+nextMove.tok.getxPosition()+","+nextMove.tok.getyPosition()
+        Log.i(LOG_TAG,"Moving token of type "+nextMove.tok.getColor()+" from "+nextMove.tok.getxPosition()+","+nextMove.tok.getyPosition()
                 +" to "+nextMove.coordinates.x+","+nextMove.coordinates.y);
         movePiece(nextMove.tok, nextMove.coordinates.x, nextMove.coordinates.y);
         if(this.getWinner() == true){
