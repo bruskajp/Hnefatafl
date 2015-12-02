@@ -35,6 +35,7 @@ public class SinglePlayerGame extends Game{
         while(!player1.getWinner() && !player2.getWinner()){
             player1.takeTurn();
             gameConnection1.sendMove(gameConnection2, player1, player2);
+            if(player1.getWinner() || player2.getWinner()) break;
             player2.takeTurn();
             gameConnection2.sendMove(gameConnection1, player2, player1);
         }

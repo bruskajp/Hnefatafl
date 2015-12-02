@@ -66,10 +66,6 @@ public class TokenMovement {
                 //Log.e("TokenMovement", "\n\n WINNER \n\n" );
             }
 
-            if(board.getRemainingPieces().size()>board.MAX_NUMBER_OF_TOKENS){
-                Log.e("TokenMovement", "ERROR: Somehow gained an extra token.");
-            }
-
             return true;
         } else {
             return false;
@@ -164,9 +160,6 @@ public class TokenMovement {
             board.removePiece(deletableToken);
             Log.i("TokenMovement", "Damn this 4");
         }
-        if(board.getRemainingPieces().size()>board.MAX_NUMBER_OF_TOKENS){
-            Log.e("TokenMovement", "ERROR: Somehow gained an extra token.");
-        }
         if(deletedTokens.size()>1){
             Log.i("TokenMovement","More than one thing deleted");
         }
@@ -194,10 +187,6 @@ public class TokenMovement {
                 }
             }
             moves.remove(moves.size()-1);
-
-            if(board.getRemainingPieces().size()>board.MAX_NUMBER_OF_TOKENS){
-                Log.e("TokenMovement", "ERROR: Somehow gained an extra token.");
-            }
 
             if(this.winner == true){
                 this.winner = false;

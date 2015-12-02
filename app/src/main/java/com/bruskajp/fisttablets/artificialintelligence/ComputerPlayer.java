@@ -36,9 +36,10 @@ public class ComputerPlayer extends Player{
      * Makes the computer player take its next move.
      */
     public void makeNextMove(){
+        int remainingPcs = board.getRemainingPieces().size();
         MovementData nextMove = ai.getNextMove();
         Log.i(LOG_TAG,"Moving token of type "+nextMove.tok.getColor()+" from "+nextMove.tok.getxPosition()+","+nextMove.tok.getyPosition()
-                +" to "+nextMove.coordinates.x+","+nextMove.coordinates.y);
+                +" to "+nextMove.coordinates.x+","+nextMove.coordinates.y+". Deleting "+(remainingPcs-board.getRemainingPieces().size()));
         movePiece(nextMove.tok, nextMove.coordinates.x, nextMove.coordinates.y);
         if(this.getWinner() == true){
             Log.i(LOG_TAG, "\n\n WINNER \n\n");

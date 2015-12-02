@@ -101,43 +101,42 @@ public class SimpleAI implements ArtificialIntelligence{
                 MovementData nextMove = possibleMoves.remove(0);//possibleMoves.remove((int) (Math.random() * possibleMoves.size()));
                 int xCoord = nextMove.tok.getxPosition();
                 int yCoord = nextMove.tok.getyPosition();
-                if(!tokenMovement.movePiece(nextMove.tok, nextMove.coordinates.x, nextMove.coordinates.y)){
-                    Log.e("SimpleAI","Doing an invalid movement from ("+nextMove.tok.getxPosition()+","+nextMove.tok.getyPosition()+
-                    ") to ("+nextMove.coordinates.x+","+nextMove.coordinates.y+")");
-                }
-                // Recurse
-                Node<NodeData> newNode = buildTree(
-                        depth-1,
-                        width,
-                        alpha,
-                        beta,
-                        Player.PlayerType.WHITE,
-                        new Node<>(new NodeData(Double.MAX_VALUE,nextMove)));
+                if(tokenMovement.movePiece(nextMove.tok, nextMove.coordinates.x, nextMove.coordinates.y)) {
 
-                double currentEval = root.getData().evaluation;
-                double newEval = newNode.getData().evaluation;
-                if(currentEval<newEval ){
-                    // Trim unnecessary children, add the new child, update alpha
-                    root.getChildren().clear();
-                    root.addChild(newNode);
-                    root.getData().evaluation = newEval;
-                    alpha = Math.max(alpha,newEval);
+                    // Recurse
+                    Node<NodeData> newNode = buildTree(
+                            depth - 1,
+                            width,
+                            alpha,
+                            beta,
+                            Player.PlayerType.WHITE,
+                            new Node<>(new NodeData(Double.MAX_VALUE, nextMove)));
+
+                    double currentEval = root.getData().evaluation;
+                    double newEval = newNode.getData().evaluation;
+                    if (currentEval < newEval) {
+                        // Trim unnecessary children, add the new child, update alpha
+                        root.getChildren().clear();
+                        root.addChild(newNode);
+                        root.getData().evaluation = newEval;
+                        alpha = Math.max(alpha, newEval);
+                    } else if (currentEval == newEval) {
+                        root.addChild(newNode);
+                    }
+                    tokenMovement.undo();
+                    if (nextMove.tok.getxPosition() != xCoord || nextMove.tok.getyPosition() != yCoord) {
+                        Log.e("SimpleAI", "ERROR: Undo not working correctly: Token at (x,y) ("
+                                + nextMove.tok.getxPosition() + "," + nextMove.tok.getyPosition() + ") Should be at (x,y) ("
+                                + xCoord + "," + yCoord + ").");
+                    }
+                    // Return if beta closes in on alpha
+                    if (beta <= alpha) return root;
+                    addedNodes++;
                 }
-                else if(currentEval==newEval){
-                    root.addChild(newNode);
+                else{
+                    Log.e("SimpleAI","Tried an invalid movement from ("+nextMove.tok.getxPosition()+","+nextMove.tok.getyPosition()+
+                            ") to ("+nextMove.coordinates.x+","+nextMove.coordinates.y+")");
                 }
-                tokenMovement.undo();
-                if(nextMove.tok.getxPosition()!=xCoord || nextMove.tok.getyPosition()!=yCoord){
-                    Log.e("SimpleAI", "ERROR: Undo not working correctly: Token at (x,y) ("
-                            +nextMove.tok.getxPosition()+","+ nextMove.tok.getyPosition()+") Should be at (x,y) ("
-                            +xCoord+","+yCoord+").");
-                }
-                if(board.getRemainingPieces().size()>Board.MAX_NUMBER_OF_TOKENS){
-                    Log.e("SimpleAI", "ERROR: Somehow gained an extra token.");
-                }
-                // Return if beta closes in on alpha
-                if(beta<=alpha) return root;
-                addedNodes++;
             }
         }
         else{
@@ -146,43 +145,40 @@ public class SimpleAI implements ArtificialIntelligence{
                 MovementData nextMove = possibleMoves.remove(0);//possibleMoves.remove((int)(Math.random() * possibleMoves.size()));
                 int xCoord = nextMove.tok.getxPosition();
                 int yCoord = nextMove.tok.getyPosition();
-                if(!tokenMovement.movePiece(nextMove.tok, nextMove.coordinates.x, nextMove.coordinates.y)){
+                if(tokenMovement.movePiece(nextMove.tok, nextMove.coordinates.x, nextMove.coordinates.y)) {
+                    // Recurse
+                    Node<NodeData> newNode = buildTree(
+                            depth - 1,
+                            width,
+                            alpha,
+                            beta,
+                            Player.PlayerType.BLACK,
+                            new Node<NodeData>(new NodeData(Double.MIN_VALUE, nextMove)));
+                    double currentEval = root.getData().evaluation;
+                    double newEval = newNode.getData().evaluation;
+                    if (currentEval > newEval) {
+                        // Trim unnecessary children, add the new child, update beta
+                        root.getChildren().clear();
+                        root.addChild(newNode);
+                        root.getData().evaluation = newEval;
+                        beta = Math.min(beta, newEval);
+                    } else if (currentEval == newEval) {
+                        root.addChild(newNode);
+                    }
+                    tokenMovement.undo();
+                    if (nextMove.tok.getxPosition() != xCoord || nextMove.tok.getyPosition() != yCoord) {
+                        Log.e("SimpleAI", "ERROR: Undo not working correctly: Token at (x,y) ("
+                                + nextMove.tok.getxPosition() + "," + nextMove.tok.getyPosition() + ") Should be at (x,y) ("
+                                + xCoord + "," + yCoord + ").");
+                    }
+                    // Return if beta closes in on alpha
+                    if (beta <= alpha) return root;
+                    addedNodes++;
+                }
+                else{
                     Log.e("SimpleAI","Doing an invalid movement from ("+nextMove.tok.getxPosition()+","+nextMove.tok.getyPosition()+
                             ") to ("+nextMove.coordinates.x+","+nextMove.coordinates.y+")");
                 }
-                // Recurse
-                Node<NodeData> newNode = buildTree(
-                        depth - 1,
-                        width,
-                        alpha,
-                        beta,
-                        Player.PlayerType.BLACK,
-                        new Node<NodeData>(new NodeData(Double.MIN_VALUE, nextMove)));
-                double currentEval = root.getData().evaluation;
-                double newEval = newNode.getData().evaluation;
-                if(currentEval>newEval ){
-                    // Trim unnecessary children, add the new child, update beta
-                    root.getChildren().clear();
-                    root.addChild(newNode);
-                    root.getData().evaluation = newEval;
-                    beta = Math.min(beta, newEval);
-                }
-                else if(currentEval==newEval){
-                    root.addChild(newNode);
-                }
-                tokenMovement.undo();
-                if(nextMove.tok.getxPosition()!=xCoord || nextMove.tok.getyPosition()!=yCoord){
-                    Log.e("SimpleAI", "ERROR: Undo not working correctly: Token at (x,y) ("
-                            +nextMove.tok.getxPosition()+","+ nextMove.tok.getyPosition()+") Should be at (x,y) ("
-                            +xCoord+","+yCoord+").");
-                }
-
-                if(board.getRemainingPieces().size()>Board.MAX_NUMBER_OF_TOKENS){
-                    Log.e("SimpleAI", "ERROR: Somehow gained an extra token.");
-                }
-                // Return if beta closes in on alpha
-                if(beta<=alpha) return root;
-                addedNodes++;
             }
         }
         return root;
