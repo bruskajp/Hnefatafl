@@ -84,10 +84,10 @@ public class SimpleAI implements ArtificialIntelligence{
      */
     private Node<NodeData> buildTree(int depth, int width, double alpha, double beta, Player.PlayerType color, Node<NodeData> root){
 
-        if(depth<0||width<0){
+        if(depth<0||width<0||board.winner){
             root.getData().evaluation = evaluate(board);
             return root;
-        };
+        }
         List<MovementData> possibleMoves = cpOptions.getPlayerOptions(color);
         if(possibleMoves.isEmpty()){
             cpOptions.getPlayerOptions(color);
@@ -95,11 +95,6 @@ public class SimpleAI implements ArtificialIntelligence{
         }
         // Black wants the highest possible eval
         int addedNodes = 0;
-        for(MovementData md : possibleMoves){
-            if(md.tok.getxPosition()==0&&md.tok.getyPosition()==12){
-                System.out.println("found");
-            }
-        }
         if(color==Player.PlayerType.BLACK){
             while(!possibleMoves.isEmpty() && addedNodes < width) {
                 // Randomly select the next move to evaluate
@@ -114,7 +109,7 @@ public class SimpleAI implements ArtificialIntelligence{
                         alpha,
                         beta,
                         Player.PlayerType.WHITE,
-                        new Node<NodeData>(new NodeData(Double.MAX_VALUE,nextMove)));
+                        new Node<>(new NodeData(Double.MAX_VALUE,nextMove)));
 
                 double currentEval = root.getData().evaluation;
                 double newEval = newNode.getData().evaluation;
@@ -134,7 +129,7 @@ public class SimpleAI implements ArtificialIntelligence{
                             +nextMove.tok.getxPosition()+","+ nextMove.tok.getyPosition()+") Should be at (x,y) ("
                             +xCoord+","+yCoord+").");
                 }
-                if(board.getRemainingPieces().size()>board.MAX_NUMBER_OF_TOKENS){
+                if(board.getRemainingPieces().size()>Board.MAX_NUMBER_OF_TOKENS){
                     Log.e("SimpleAI", "ERROR: Somehow gained an extra token.");
                 }
                 // Return if beta closes in on alpha
@@ -176,7 +171,7 @@ public class SimpleAI implements ArtificialIntelligence{
                             +xCoord+","+yCoord+").");
                 }
 
-                if(board.getRemainingPieces().size()>board.MAX_NUMBER_OF_TOKENS){
+                if(board.getRemainingPieces().size()>Board.MAX_NUMBER_OF_TOKENS){
                     Log.e("SimpleAI", "ERROR: Somehow gained an extra token.");
                 }
                 // Return if beta closes in on alpha
@@ -223,7 +218,7 @@ public class SimpleAI implements ArtificialIntelligence{
     protected int findManhattanDistance(Board board, Token king){
         int xPos = king.getxPosition();
         int yPos = king.getyPosition();
-        int boardDimension = board.BOARD_LENGTH;
+        int boardDimension = Board.BOARD_LENGTH;
         return ((xPos>(boardDimension/2)) ? boardDimension-xPos : xPos )
                 + ((yPos>(boardDimension/2)) ? boardDimension-yPos : yPos);
     }
