@@ -19,7 +19,6 @@ public class LocalGameConnection extends GameConnection{
 
     public void sendMove(GameConnection gameConnection, Player player1, Player player2) {
         gameConnection.receiveMove(player1.getLastMove(), player2);
-        Log.i("LocalGameConnection", "\n\n It moved \n\n" );
     }
 
     public void receiveMove(Move lastMove, Player player) {
