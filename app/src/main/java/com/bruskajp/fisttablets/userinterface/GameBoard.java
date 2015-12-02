@@ -81,12 +81,12 @@ public class GameBoard extends Activity{
         setContentView(R.layout.boardgame);
         board = (ImageView) findViewById(R.id.board);
 
-        //int pieceSize = getWindowManager().getDefaultDisplay().getWidth() / 11;
+        int pieceSize = getWindowManager().getDefaultDisplay().getWidth() / 11;
 
         kingPiece = (ImageView) findViewById(R.id.kingpiece);
 
-       // kingPiece.getLayoutParams().height = pieceSize;
-       //ncd  kingPiece.getLayoutParams().width = pieceSize;
+        kingPiece.getLayoutParams().height = pieceSize;
+        kingPiece.getLayoutParams().width = pieceSize;
 
 
 
@@ -115,6 +115,55 @@ public class GameBoard extends Activity{
         black23 = (ImageView) findViewById(R.id.black23);
         black24 = (ImageView) findViewById(R.id.black24);
 
+        black1.getLayoutParams().height = pieceSize;
+        black1.getLayoutParams().width = pieceSize;
+        black2.getLayoutParams().height = pieceSize;
+        black2.getLayoutParams().width = pieceSize;
+        black3.getLayoutParams().height = pieceSize;
+        black3.getLayoutParams().width = pieceSize;
+        black4.getLayoutParams().height = pieceSize;
+        black4.getLayoutParams().width = pieceSize;
+        black5.getLayoutParams().height = pieceSize;
+        black5.getLayoutParams().width = pieceSize;
+        black6.getLayoutParams().height = pieceSize;
+        black6.getLayoutParams().width = pieceSize;
+        black7.getLayoutParams().height = pieceSize;
+        black7.getLayoutParams().width = pieceSize;
+        black8.getLayoutParams().height = pieceSize;
+        black8.getLayoutParams().width = pieceSize;
+        black9.getLayoutParams().height = pieceSize;
+        black9.getLayoutParams().width = pieceSize;
+        black10.getLayoutParams().height = pieceSize;
+        black10.getLayoutParams().width = pieceSize;
+        black11.getLayoutParams().height = pieceSize;
+        black11.getLayoutParams().width = pieceSize;
+        black12.getLayoutParams().height = pieceSize;
+        black12.getLayoutParams().width = pieceSize;
+        black13.getLayoutParams().height = pieceSize;
+        black13.getLayoutParams().width = pieceSize;
+        black14.getLayoutParams().height = pieceSize;
+        black14.getLayoutParams().width = pieceSize;
+        black15.getLayoutParams().height = pieceSize;
+        black15.getLayoutParams().width = pieceSize;
+        black16.getLayoutParams().height = pieceSize;
+        black16.getLayoutParams().width = pieceSize;
+        black17.getLayoutParams().height = pieceSize;
+        black17.getLayoutParams().width = pieceSize;
+        black18.getLayoutParams().height = pieceSize;
+        black18.getLayoutParams().width = pieceSize;
+        black19.getLayoutParams().height = pieceSize;
+        black19.getLayoutParams().width = pieceSize;
+        black20.getLayoutParams().height = pieceSize;
+        black20.getLayoutParams().width = pieceSize;
+        black21.getLayoutParams().height = pieceSize;
+        black21.getLayoutParams().width = pieceSize;
+        black22.getLayoutParams().height = pieceSize;
+        black22.getLayoutParams().width = pieceSize;
+        black23.getLayoutParams().height = pieceSize;
+        black23.getLayoutParams().width = pieceSize;
+        black24.getLayoutParams().height = pieceSize;
+        black24.getLayoutParams().width = pieceSize;
+
         white1 = (ImageView) findViewById(R.id.white1);
         white2 = (ImageView) findViewById(R.id.white2);
         white3 = (ImageView) findViewById(R.id.white3);
@@ -127,6 +176,31 @@ public class GameBoard extends Activity{
         white10 = (ImageView) findViewById(R.id.white10);
         white11 = (ImageView) findViewById(R.id.white11);
         white12 = (ImageView) findViewById(R.id.white12);
+
+        white1.getLayoutParams().height = pieceSize;
+        white1.getLayoutParams().width = pieceSize;
+        white2.getLayoutParams().height = pieceSize;
+        white2.getLayoutParams().width = pieceSize;
+        white3.getLayoutParams().height = pieceSize;
+        white3.getLayoutParams().width = pieceSize;
+        white4.getLayoutParams().height = pieceSize;
+        white4.getLayoutParams().width = pieceSize;
+        white5.getLayoutParams().height = pieceSize;
+        white5.getLayoutParams().width = pieceSize;
+        white6.getLayoutParams().height = pieceSize;
+        white6.getLayoutParams().width = pieceSize;
+        white7.getLayoutParams().height = pieceSize;
+        white7.getLayoutParams().width = pieceSize;
+        white8.getLayoutParams().height = pieceSize;
+        white8.getLayoutParams().width = pieceSize;
+        white9.getLayoutParams().height = pieceSize;
+        white9.getLayoutParams().width = pieceSize;
+        white10.getLayoutParams().height = pieceSize;
+        white10.getLayoutParams().width = pieceSize;
+        white11.getLayoutParams().height = pieceSize;
+        white11.getLayoutParams().width = pieceSize;
+        white12.getLayoutParams().height = pieceSize;
+        white12.getLayoutParams().width = pieceSize;
 
         buttonExit = (Button) findViewById(R.id.exit);
 

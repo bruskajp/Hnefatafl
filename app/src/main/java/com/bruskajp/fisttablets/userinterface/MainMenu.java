@@ -83,8 +83,8 @@ public class MainMenu extends Activity{
 
                 Game SinglePlayerGame = new SinglePlayerGame();
 
-                //Intent myIntent = new Intent(v.getContext(), GameBoard.class);
-                //startActivityForResult(myIntent, 0);
+                Intent myIntent = new Intent(v.getContext(), GameBoard.class);
+                startActivityForResult(myIntent, 0);
 
 
             }

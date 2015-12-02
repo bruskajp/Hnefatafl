@@ -17,9 +17,13 @@
         </activity>
         <activity
             android:name="com.bruskajp.fisttablets.userinterface.MainMenu"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".userinterface.GameBoard"></activity>
+        <activity
+            android:name=".userinterface.GameBoard"
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 
 </manifest>

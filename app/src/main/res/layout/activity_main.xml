@@ -10,7 +10,7 @@
         android:id="@+id/textView"
         android:layout_above="@+id/buttonStartLocalGame"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="56dp" />
+        android:layout_marginBottom="56dp"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -28,6 +28,6 @@
         android:id="@+id/buttonStartOnlineGame"
         android:layout_marginBottom="188dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>
