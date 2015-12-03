@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View.*;
@@ -27,6 +28,8 @@ import android.widget.RelativeLayout;
 import java.util.Random;
 
 import com.bruskajp.fisttablets.R;
+import com.bruskajp.fisttablets.gameengine.Board;
+import com.bruskajp.fisttablets.gameengine.Token;
 
 /**
  * Created by josephd on 11/16/15.
@@ -35,20 +38,21 @@ public class GameBoard extends Activity{
 
     Button buttonExit;
     ImageView board;
-    ImageView kingPiece;
-    ImageView black1;
-    ImageView black2;
-    ImageView black3;
-    ImageView black4;
-    ImageView black5;
-    ImageView black6;
-    ImageView black7;
-    ImageView black8;
-    ImageView black9;
-    ImageView black10;
-    ImageView black11;
-    ImageView black12;
-    ImageView black13;
+    Board pieces = new Board();
+    static ImageView kingPiece;
+    static ImageView black1;
+    static ImageView black2;
+    static ImageView black3;
+    static ImageView black4;
+    static ImageView black5;
+    static ImageView black6;
+    static ImageView black7;
+    static ImageView black8;
+    static ImageView black9;
+    static ImageView black10;
+    static ImageView black11;
+    static ImageView black12;
+    static ImageView black13;
     ImageView black14;
     ImageView black15;
     ImageView black16;
@@ -79,8 +83,8 @@ public class GameBoard extends Activity{
     int bottom;
     int psize;
     boolean editable = true;
-    int[] validx;
-    int[] validy;
+    static int[] validx;
+    static int[] validy;
 
     private final static String LOG_TAG = "GameBoard";
     @Override
@@ -616,4 +620,12 @@ public class GameBoard extends Activity{
             }
         });
     }
+
+    public static void movePieceComputer(int oldX, int oldY, int newX, int newY){
+
+        ImageView move = null;
+        move.animate().x(validx[newX]).setDuration(1);
+        move.animate().y(validy[newY]).setDuration(1);
+    }
+
 }
