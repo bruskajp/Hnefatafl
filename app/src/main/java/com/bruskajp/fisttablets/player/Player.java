@@ -1,14 +1,9 @@
 package com.bruskajp.fisttablets.player;
 
-import android.util.Log;
-
 import com.bruskajp.fisttablets.gameengine.Board;
 import com.bruskajp.fisttablets.gameengine.Move;
 import com.bruskajp.fisttablets.gameengine.Token;
 import com.bruskajp.fisttablets.gameengine.TokenMovement;
-
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Created by bruskajp on 10/21/15.
@@ -67,10 +62,11 @@ public abstract class Player {
         return tokenMovement.getlastMove();
     }
 
-    public Boolean getWinner(){
-        return tokenMovement.getWinner();
+    public Boolean isWinner(){
+        return tokenMovement.isWinner();
     }
 
+    public PlayerType getWinnerType(){ return tokenMovement.getWinnerType();}
     public String getPlayerType() {
         if(playerType.equals(PlayerType.WHITE)) {
             return "White";

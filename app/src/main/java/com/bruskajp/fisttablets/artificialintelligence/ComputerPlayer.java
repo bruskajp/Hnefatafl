@@ -43,10 +43,10 @@ public class ComputerPlayer extends Player{
         movePiece(nextMove.tok, nextMove.coordinates.x, nextMove.coordinates.y);
         int dif;
         System.out.println(board.toString());
-        if(( dif=board.getRemainingPieces().size()-remainingPcs)!=0){
+        if(( dif=remainingPcs-board.getRemainingPieces().size())!=0){
             Log.i(LOG_TAG,"Deleted "+dif+" Tokens");
         }
-        if(this.getWinner() == true){
+        if(this.isWinner() == true){
             Log.i(LOG_TAG, "\n\n WINNER \n\n");
         }
     }

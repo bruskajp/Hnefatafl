@@ -2,6 +2,8 @@ package com.bruskajp.fisttablets.gameengine;
 
 import android.util.Log;
 
+import com.bruskajp.fisttablets.player.Player;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -13,6 +15,7 @@ public class TokenMovement {
     Board board;
     private List<Move> moves;
     public boolean winner = false;
+    public Player.PlayerType winnerColor = null;
     private final int edgeIndex;
 
     public TokenMovement(Board board){
@@ -22,10 +25,10 @@ public class TokenMovement {
     }
 
     public Boolean isMoveValid(Token token, int xPosition, int yPosition) {
-        if(xPosition<0||yPosition<0||xPosition>=Board.BOARD_LENGTH||yPosition>=Board.BOARD_LENGTH) return false;
+        if(xPosition<0||yPosition<0||xPosition>edgeIndex||yPosition>edgeIndex) return false;
         if(!token.isKing()){
-            if((xPosition==0&&(yPosition==0 || yPosition==Board.BOARD_LENGTH-1) )||
-                    (xPosition==10&&(yPosition==0 || yPosition==Board.BOARD_LENGTH-1))) return false;
+            if((xPosition==0&&(yPosition==0 || yPosition==edgeIndex) )||
+                    (xPosition==edgeIndex&&(yPosition==0 || yPosition==edgeIndex))) return false;
 
         }
         if(token.getxPosition() == xPosition && token.getyPosition() != yPosition && board.checkBoardPosition(xPosition, yPosition) == null) {
@@ -68,6 +71,7 @@ public class TokenMovement {
                     (board.checkBoardPosition(edgeIndex,0) != null && board.checkBoardPosition(edgeIndex,0).isKing()) ||
                     (board.checkBoardPosition(edgeIndex,edgeIndex) != null && board.checkBoardPosition(edgeIndex,edgeIndex).isKing())){
                 this.winner = true;
+                this.winnerColor = Player.PlayerType.WHITE;
                 //Log.e("TokenMovement", "\n\n WINNER \n\n" );
             }
 
@@ -184,6 +188,7 @@ public class TokenMovement {
 
             if(this.winner == true){
                 this.winner = false;
+                this.winnerColor = null;
             }
         }
     }
@@ -195,7 +200,11 @@ public class TokenMovement {
         return moves.get(moves.size()-1);
     }
 
-    public boolean getWinner() {
+    public boolean isWinner() {
         return this.winner;
+    }
+
+    public Player.PlayerType getWinnerType(){
+        return this.winnerColor;
     }
 }
