@@ -9,7 +9,8 @@ import android.view.MenuItem;
 import android.view.View.*;
 import android.widget.Button;
 
-
+import java.lang.Integer;
+import java.lang.String;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -21,6 +22,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+
 import java.util.Random;
 
 import com.bruskajp.fisttablets.R;
@@ -70,6 +73,12 @@ public class GameBoard extends Activity{
     ImageView white11;
     ImageView white12;
 
+    float counterx;
+    float countery;
+    float top;
+    float bottom;
+    int psize;
+    boolean editable = true;
 
     private final static String LOG_TAG = "GameBoard";
     @Override
@@ -81,12 +90,19 @@ public class GameBoard extends Activity{
         setContentView(R.layout.boardgame);
         board = (ImageView) findViewById(R.id.board);
 
-        int pieceSize = getWindowManager().getDefaultDisplay().getWidth() / 11;
-
+        psize = 66;
+        int pieceSize = psize;
         kingPiece = (ImageView) findViewById(R.id.kingpiece);
 
         kingPiece.getLayoutParams().height = pieceSize;
         kingPiece.getLayoutParams().width = pieceSize;
+
+        float left_side = psize/2;
+        top = (getWindowManager().getDefaultDisplay().getHeight()/2) - (getWindowManager().getDefaultDisplay().getWidth() / 2) - left_side;
+        bottom = (getWindowManager().getDefaultDisplay().getHeight()/2) + (getWindowManager().getDefaultDisplay().getWidth() / 2) - left_side;
+        counterx = 0;
+        countery = top;
+
 
 
 
@@ -561,11 +577,22 @@ public class GameBoard extends Activity{
             }
         });
     }
-    public void movePiece(ImageView move){
-        final Random rand = new Random();
-        move.animate().x(rand.nextInt(board.getWidth())).setDuration(500);
-        move.animate().y(rand.nextInt(board.getWidth())).setDuration(500);
 
+    public void movePiece(final ImageView move){
+        final RelativeLayout parent = (RelativeLayout) findViewById(R.id.parent);
+        editable = true;
 
+        parent.setOnTouchListener(new OnTouchListener() {
+            public boolean onTouch(View v, MotionEvent ev) {
+                if(editable){
+                    move.animate().x(ev.getX()).setDuration(1);
+                    move.animate().y(ev.getY()).setDuration(1);
+                    editable = false;
+                }
+
+                Log.i(LOG_TAG, "Touch at " + ev.getX() + ", " + ev.getY());
+                return true;
+            }
+        });
     }
 }
