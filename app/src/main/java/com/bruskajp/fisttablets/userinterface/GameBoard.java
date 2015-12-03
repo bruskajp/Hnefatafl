@@ -694,41 +694,53 @@ public class GameBoard extends Activity{
         piecesInfo.add(new PieceInfo(black3,validx[5],validy[0]));
         piecesInfo.add(new PieceInfo(black4,validx[6],validy[0]));
         piecesInfo.add(new PieceInfo(black5,validx[7],validy[0]));
+
         piecesInfo.add(new PieceInfo(black6,validx[5],validy[1]));
+
         piecesInfo.add(new PieceInfo(black7,validx[0],validy[3]));
         piecesInfo.add(new PieceInfo(black8,validx[10],validy[3]));
+
         piecesInfo.add(new PieceInfo(black9,validx[0],validy[4]));
         piecesInfo.add(new PieceInfo(black10,validx[10],validy[4]));
+
         piecesInfo.add(new PieceInfo(black11,validx[0],validy[5]));
-        piecesInfo.add(new PieceInfo(black12,validx[9],validy[5]));
-        piecesInfo.add(new PieceInfo(black13,validx[10],validy[5]));
-        piecesInfo.add(new PieceInfo(black14,validx[0],validy[6]));
-        piecesInfo.add(new PieceInfo(black15,validx[10],validy[6]));
-        piecesInfo.add(new PieceInfo(black16,validx[0],validy[7]));
-        piecesInfo.add(new PieceInfo(black17,validx[10],validy[7]));
-        piecesInfo.add(new PieceInfo(black18,validx[5],validy[9]));
-        piecesInfo.add(new PieceInfo(black19,validx[3],validy[10]));
-        piecesInfo.add(new PieceInfo(black20,validx[4],validy[10]));
-        piecesInfo.add(new PieceInfo(black21,validx[5],validy[10]));
-        piecesInfo.add(new PieceInfo(black22,validx[6],validy[10]));
-        piecesInfo.add(new PieceInfo(black23,validx[7],validy[10]));
-        piecesInfo.add(new PieceInfo(black24,validx[9],validy[10]));
+        piecesInfo.add(new PieceInfo(black12,validx[1],validy[5]));
+        piecesInfo.add(new PieceInfo(black13,validx[9],validy[5]));
+        piecesInfo.add(new PieceInfo(black14,validx[10],validy[5]));
+
+        piecesInfo.add(new PieceInfo(black15,validx[0],validy[6]));
+        piecesInfo.add(new PieceInfo(black16,validx[10],validy[6]));
+
+        piecesInfo.add(new PieceInfo(black17,validx[0],validy[7]));
+        piecesInfo.add(new PieceInfo(black18,validx[10],validy[7]));
+
+        piecesInfo.add(new PieceInfo(black19,validx[5],validy[9]));
+
+        piecesInfo.add(new PieceInfo(black20,validx[3],validy[10]));
+        piecesInfo.add(new PieceInfo(black21,validx[4],validy[10]));
+        piecesInfo.add(new PieceInfo(black22,validx[5],validy[10]));
+        piecesInfo.add(new PieceInfo(black23,validx[6],validy[10]));
+        piecesInfo.add(new PieceInfo(black24,validx[7],validy[10]));
     }
 
     private void setWhiteBoardPieces() {
 
         piecesInfo.add(new PieceInfo(white1,validx[5],validy[3]));
+
         piecesInfo.add(new PieceInfo(white2,validx[4],validy[4]));
         piecesInfo.add(new PieceInfo(white3,validx[5],validy[4]));
         piecesInfo.add(new PieceInfo(white4,validx[6],validy[4]));
+
         piecesInfo.add(new PieceInfo(white5,validx[3],validy[5]));
         piecesInfo.add(new PieceInfo(white6,validx[4],validy[5]));
         piecesInfo.add(new PieceInfo(kingPiece,validx[5],validy[5]));
         piecesInfo.add(new PieceInfo(white7,validx[6],validy[5]));
         piecesInfo.add(new PieceInfo(white8,validx[7],validy[5]));
+
         piecesInfo.add(new PieceInfo(white9,validx[4],validy[6]));
         piecesInfo.add(new PieceInfo(white10,validx[5],validy[6]));
         piecesInfo.add(new PieceInfo(white11,validx[6],validy[6]));
+
         piecesInfo.add(new PieceInfo(white12,validx[5],validy[7]));
 
     }
