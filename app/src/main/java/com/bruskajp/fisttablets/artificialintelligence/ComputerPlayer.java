@@ -38,9 +38,14 @@ public class ComputerPlayer extends Player{
     public void makeNextMove(){
         int remainingPcs = board.getRemainingPieces().size();
         MovementData nextMove = ai.getNextMove();
-        Log.i(LOG_TAG,"Moving token of type "+nextMove.tok.getColor()+" from "+nextMove.tok.getxPosition()+","+nextMove.tok.getyPosition()
-                +" to "+nextMove.coordinates.x+","+nextMove.coordinates.y+". Deleting "+(remainingPcs-board.getRemainingPieces().size()));
+        Log.i(LOG_TAG,"Moving token of type "+nextMove.tok.getTokenType()+" from "+nextMove.tok.getxPosition()+","+nextMove.tok.getyPosition()
+                +" to "+nextMove.coordinates.x+","+nextMove.coordinates.y);
         movePiece(nextMove.tok, nextMove.coordinates.x, nextMove.coordinates.y);
+        int dif;
+        Log.i(LOG_TAG,"\n"+board.toString());
+        if(( dif=board.getRemainingPieces().size()-remainingPcs)!=0){
+            Log.i(LOG_TAG,"Deleted "+dif+" Tokens");
+        }
         if(this.getWinner() == true){
             Log.i(LOG_TAG, "\n\n WINNER \n\n");
         }

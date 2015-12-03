@@ -91,4 +91,25 @@ public class Board {
         //THIS IS YOU DAVID
     }
 
+    @Override
+    public String toString(){
+        String ret="";
+        for(int i = 0 ; i < BOARD_LENGTH; ++i){
+            for(int j = 0; j < BOARD_LENGTH; ++j){
+                if(board[j][i] == null){
+                    ret+="_";
+                }
+                else if(board[j][i].isKing()){
+                    ret+="K";
+                }
+                else{
+                    ret+= board[j][i].getColor() == Token.TokenType.WHITE ? "W" : "B";
+                }
+                ret+="\t";
+            }
+            ret+="\n";
+        }
+        return ret;
+    }
+
 }

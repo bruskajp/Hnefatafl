@@ -49,7 +49,7 @@ public class SimpleAI implements ArtificialIntelligence{
      * @return A {@code MovementData} that contains information on what move the computer should do next.
      */
     public MovementData getNextMove(){
-        return minMaxSearch(SEARCH_DEPTH,SEARCH_WIDTH);
+        return minMaxSearch(color== Player.PlayerType.WHITE? 0 :SEARCH_DEPTH,SEARCH_WIDTH);
     }
 
     /***
