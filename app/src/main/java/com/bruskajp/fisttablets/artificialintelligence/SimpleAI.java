@@ -72,7 +72,6 @@ public class SimpleAI implements ArtificialIntelligence{
         }
         // Look for an immediate king win
         if(color== Player.PlayerType.WHITE) {
-            MovementData kingWin = null;
             for(Node<NodeData> node : root.getChildren()){
                 MovementData md = node.getData().movementData;
                 if(md.tok.isKing()){
