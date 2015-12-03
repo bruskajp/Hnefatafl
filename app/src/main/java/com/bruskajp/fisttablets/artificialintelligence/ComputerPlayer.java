@@ -42,7 +42,7 @@ public class ComputerPlayer extends Player{
                 +" to "+nextMove.coordinates.x+","+nextMove.coordinates.y);
         movePiece(nextMove.tok, nextMove.coordinates.x, nextMove.coordinates.y);
         int dif;
-        Log.i(LOG_TAG,"\n"+board.toString());
+        System.out.println(board.toString());
         if(( dif=board.getRemainingPieces().size()-remainingPcs)!=0){
             Log.i(LOG_TAG,"Deleted "+dif+" Tokens");
         }

@@ -49,7 +49,7 @@ public class SimpleAI implements ArtificialIntelligence{
      * @return A {@code MovementData} that contains information on what move the computer should do next.
      */
     public MovementData getNextMove(){
-        return minMaxSearch(color== Player.PlayerType.WHITE? 0 :SEARCH_DEPTH,SEARCH_WIDTH);
+        return minMaxSearch(SEARCH_DEPTH,SEARCH_WIDTH);
     }
 
     /***
@@ -99,8 +99,6 @@ public class SimpleAI implements ArtificialIntelligence{
             while(!possibleMoves.isEmpty() && addedNodes < width) {
                 // Randomly select the next move to evaluate
                 MovementData nextMove = possibleMoves.remove(0);//possibleMoves.remove((int) (Math.random() * possibleMoves.size()));
-                int xCoord = nextMove.tok.getxPosition();
-                int yCoord = nextMove.tok.getyPosition();
                 if(tokenMovement.movePiece(nextMove.tok, nextMove.coordinates.x, nextMove.coordinates.y)) {
 
                     // Recurse
@@ -110,7 +108,7 @@ public class SimpleAI implements ArtificialIntelligence{
                             alpha,
                             beta,
                             Player.PlayerType.WHITE,
-                            new Node<>(new NodeData(Double.MAX_VALUE, nextMove)));
+                            new Node<>(new NodeData(INFINITY, nextMove)));
 
                     double currentEval = root.getData().evaluation;
                     double newEval = newNode.getData().evaluation;
@@ -124,11 +122,6 @@ public class SimpleAI implements ArtificialIntelligence{
                         root.addChild(newNode);
                     }
                     tokenMovement.undo();
-                    if (nextMove.tok.getxPosition() != xCoord || nextMove.tok.getyPosition() != yCoord) {
-                        Log.e("SimpleAI", "ERROR: Undo not working correctly: Token at (x,y) ("
-                                + nextMove.tok.getxPosition() + "," + nextMove.tok.getyPosition() + ") Should be at (x,y) ("
-                                + xCoord + "," + yCoord + ").");
-                    }
                     // Return if beta closes in on alpha
                     if (beta <= alpha) return root;
                     addedNodes++;
@@ -143,8 +136,6 @@ public class SimpleAI implements ArtificialIntelligence{
             while(!possibleMoves.isEmpty() && addedNodes < width) {
                 // Randomly select the next move to evaluate
                 MovementData nextMove = possibleMoves.remove(0);//possibleMoves.remove((int)(Math.random() * possibleMoves.size()));
-                int xCoord = nextMove.tok.getxPosition();
-                int yCoord = nextMove.tok.getyPosition();
                 if(tokenMovement.movePiece(nextMove.tok, nextMove.coordinates.x, nextMove.coordinates.y)) {
                     // Recurse
                     Node<NodeData> newNode = buildTree(
@@ -153,7 +144,7 @@ public class SimpleAI implements ArtificialIntelligence{
                             alpha,
                             beta,
                             Player.PlayerType.BLACK,
-                            new Node<NodeData>(new NodeData(Double.MIN_VALUE, nextMove)));
+                            new Node<NodeData>(new NodeData(NEGATIVE_INFINITY, nextMove)));
                     double currentEval = root.getData().evaluation;
                     double newEval = newNode.getData().evaluation;
                     if (currentEval > newEval) {
@@ -166,11 +157,6 @@ public class SimpleAI implements ArtificialIntelligence{
                         root.addChild(newNode);
                     }
                     tokenMovement.undo();
-                    if (nextMove.tok.getxPosition() != xCoord || nextMove.tok.getyPosition() != yCoord) {
-                        Log.e("SimpleAI", "ERROR: Undo not working correctly: Token at (x,y) ("
-                                + nextMove.tok.getxPosition() + "," + nextMove.tok.getyPosition() + ") Should be at (x,y) ("
-                                + xCoord + "," + yCoord + ").");
-                    }
                     // Return if beta closes in on alpha
                     if (beta <= alpha) return root;
                     addedNodes++;
@@ -205,7 +191,7 @@ public class SimpleAI implements ArtificialIntelligence{
             }
         }
 
-        return (Board.INITIAL_NUMBER_OF_BLACK_TOKENS-blackPieces)-
+        return -(Board.INITIAL_NUMBER_OF_BLACK_TOKENS-blackPieces)+
                 (Board.INITIAL_NUMBER_OF_WHITE_TOKENS - whitePieces)+
                 .1*kingDistance;
     }
