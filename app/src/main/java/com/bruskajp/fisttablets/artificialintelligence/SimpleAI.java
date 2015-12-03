@@ -19,6 +19,7 @@ public class SimpleAI implements ArtificialIntelligence{
     public static final int SEARCH_WIDTH = 300;
     private final Double INFINITY = Double.POSITIVE_INFINITY;
     private final Double NEGATIVE_INFINITY = Double.NEGATIVE_INFINITY;
+    private final int EDGE_INDEX;
     Node<NodeData> root;
     protected class NodeData implements Comparable{
         MovementData movementData;
@@ -42,6 +43,7 @@ public class SimpleAI implements ArtificialIntelligence{
         this.tokenMovement= tokenMovement;
         this.color = color;
         cpOptions = new ComputerPlayerOptions(board, tokenMovement);
+        EDGE_INDEX = board.BOARD_LENGTH-1;
     }
 
     /***
@@ -68,6 +70,37 @@ public class SimpleAI implements ArtificialIntelligence{
         if(root.getChildren().isEmpty()){
             Log.e("SimpleAI","ERROR: children empty");
         }
+        // Look for an immediate king win
+        if(color== Player.PlayerType.WHITE) {
+            for(Node<NodeData> node : root.getChildren()){
+                MovementData md = node.getData().movementData;
+                if(md.tok.isKing()){
+                    int x = md.coordinates.x;
+                    int y = md.coordinates.y;
+                    if( (x==0 && (y==0||y== EDGE_INDEX))
+                            ||(x== EDGE_INDEX&&(y==0||y== EDGE_INDEX))){
+                        return md;
+                    }
+                }
+            }
+        }
+        // Look to see if any pieces can be taken in one move. If so, take the move that takes the most.
+        MovementData deletionMove = null;
+        int maxDeletions = 0;
+        for(Node<NodeData> node : root.getChildren()){
+            MovementData md = node.getData().movementData;
+            int initPcs = board.getRemainingPieces().size();
+            tokenMovement.movePiece(md.tok, md.coordinates.x, md.coordinates.y);
+            int finalPcs = board.getRemainingPieces().size();
+            tokenMovement.undo();
+            if(initPcs - finalPcs > maxDeletions) {
+                maxDeletions = initPcs - finalPcs;
+                deletionMove = md;
+            }
+
+        }
+        if(deletionMove != null) return deletionMove;
+
         return root.getChildren()
                 .get((int)(Math.random() * root.getChildren().size()))
                 .getData()
@@ -99,8 +132,6 @@ public class SimpleAI implements ArtificialIntelligence{
             while(!possibleMoves.isEmpty() && addedNodes < width) {
                 // Randomly select the next move to evaluate
                 MovementData nextMove = possibleMoves.remove(0);//possibleMoves.remove((int) (Math.random() * possibleMoves.size()));
-                int xCoord = nextMove.tok.getxPosition();
-                int yCoord = nextMove.tok.getyPosition();
                 if(tokenMovement.movePiece(nextMove.tok, nextMove.coordinates.x, nextMove.coordinates.y)) {
 
                     // Recurse
@@ -110,7 +141,7 @@ public class SimpleAI implements ArtificialIntelligence{
                             alpha,
                             beta,
                             Player.PlayerType.WHITE,
-                            new Node<>(new NodeData(Double.MAX_VALUE, nextMove)));
+                            new Node<>(new NodeData(INFINITY, nextMove)));
 
                     double currentEval = root.getData().evaluation;
                     double newEval = newNode.getData().evaluation;
@@ -124,11 +155,6 @@ public class SimpleAI implements ArtificialIntelligence{
                         root.addChild(newNode);
                     }
                     tokenMovement.undo();
-                    if (nextMove.tok.getxPosition() != xCoord || nextMove.tok.getyPosition() != yCoord) {
-                        Log.e("SimpleAI", "ERROR: Undo not working correctly: Token at (x,y) ("
-                                + nextMove.tok.getxPosition() + "," + nextMove.tok.getyPosition() + ") Should be at (x,y) ("
-                                + xCoord + "," + yCoord + ").");
-                    }
                     // Return if beta closes in on alpha
                     if (beta <= alpha) return root;
                     addedNodes++;
@@ -143,8 +169,6 @@ public class SimpleAI implements ArtificialIntelligence{
             while(!possibleMoves.isEmpty() && addedNodes < width) {
                 // Randomly select the next move to evaluate
                 MovementData nextMove = possibleMoves.remove(0);//possibleMoves.remove((int)(Math.random() * possibleMoves.size()));
-                int xCoord = nextMove.tok.getxPosition();
-                int yCoord = nextMove.tok.getyPosition();
                 if(tokenMovement.movePiece(nextMove.tok, nextMove.coordinates.x, nextMove.coordinates.y)) {
                     // Recurse
                     Node<NodeData> newNode = buildTree(
@@ -153,7 +177,7 @@ public class SimpleAI implements ArtificialIntelligence{
                             alpha,
                             beta,
                             Player.PlayerType.BLACK,
-                            new Node<NodeData>(new NodeData(Double.MIN_VALUE, nextMove)));
+                            new Node<NodeData>(new NodeData(NEGATIVE_INFINITY, nextMove)));
                     double currentEval = root.getData().evaluation;
                     double newEval = newNode.getData().evaluation;
                     if (currentEval > newEval) {
@@ -166,11 +190,6 @@ public class SimpleAI implements ArtificialIntelligence{
                         root.addChild(newNode);
                     }
                     tokenMovement.undo();
-                    if (nextMove.tok.getxPosition() != xCoord || nextMove.tok.getyPosition() != yCoord) {
-                        Log.e("SimpleAI", "ERROR: Undo not working correctly: Token at (x,y) ("
-                                + nextMove.tok.getxPosition() + "," + nextMove.tok.getyPosition() + ") Should be at (x,y) ("
-                                + xCoord + "," + yCoord + ").");
-                    }
                     // Return if beta closes in on alpha
                     if (beta <= alpha) return root;
                     addedNodes++;
@@ -205,9 +224,9 @@ public class SimpleAI implements ArtificialIntelligence{
             }
         }
 
-        return (Board.INITIAL_NUMBER_OF_BLACK_TOKENS-blackPieces)-
+        return -(Board.INITIAL_NUMBER_OF_BLACK_TOKENS-blackPieces)+
                 (Board.INITIAL_NUMBER_OF_WHITE_TOKENS - whitePieces)+
-                .1*kingDistance;
+                .1*(kingDistance == 0 ? -1000 : kingDistance); // Make the king distance arbitrarily small to indicate that white will win
     }
 
     /***

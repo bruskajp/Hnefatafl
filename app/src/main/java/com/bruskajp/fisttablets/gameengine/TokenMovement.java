@@ -2,6 +2,8 @@ package com.bruskajp.fisttablets.gameengine;
 
 import android.util.Log;
 
+import com.bruskajp.fisttablets.player.Player;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -13,6 +15,7 @@ public class TokenMovement {
     Board board;
     private List<Move> moves;
     public boolean winner = false;
+    public Player.PlayerType winnerColor = null;
     private final int edgeIndex;
 
     public TokenMovement(Board board){
@@ -22,7 +25,12 @@ public class TokenMovement {
     }
 
     public Boolean isMoveValid(Token token, int xPosition, int yPosition) {
-        if(xPosition<0||yPosition<0||xPosition>=Board.BOARD_LENGTH||yPosition>=Board.BOARD_LENGTH) return false;
+        if(xPosition<0||yPosition<0||xPosition>edgeIndex||yPosition>edgeIndex) return false;
+        if(!token.isKing()){
+            if((xPosition==0&&(yPosition==0 || yPosition==edgeIndex) )||
+                    (xPosition==edgeIndex&&(yPosition==0 || yPosition==edgeIndex))) return false;
+
+        }
         if(token.getxPosition() == xPosition && token.getyPosition() != yPosition && board.checkBoardPosition(xPosition, yPosition) == null) {
             return true;
         }
@@ -63,6 +71,7 @@ public class TokenMovement {
                     (board.checkBoardPosition(edgeIndex,0) != null && board.checkBoardPosition(edgeIndex,0).isKing()) ||
                     (board.checkBoardPosition(edgeIndex,edgeIndex) != null && board.checkBoardPosition(edgeIndex,edgeIndex).isKing())){
                 this.winner = true;
+                this.winnerColor = Player.PlayerType.WHITE;
                 //Log.e("TokenMovement", "\n\n WINNER \n\n" );
             }
 
@@ -83,7 +92,6 @@ public class TokenMovement {
             Token deletableToken = board.checkBoardPosition(xPosition + 1,yPosition);
             deletedTokens.add(deletableToken);
             board.removePiece(deletableToken);
-            //Log.i("TokenMovement", "Fuck this");
         }
 
         if(board.checkBoardPosition(xPosition - 1,yPosition) != null && board.checkBoardPosition(xPosition - 2,yPosition) != null &&
@@ -93,7 +101,6 @@ public class TokenMovement {
             Token deletableToken = board.checkBoardPosition(xPosition - 1,yPosition);
             deletedTokens.add(deletableToken);
             board.removePiece(deletableToken);
-            //Log.i("TokenMovement", "Fuck this 2");
         }
 
         if(board.checkBoardPosition(xPosition,yPosition + 1) != null && board.checkBoardPosition(xPosition,yPosition + 2) != null &&
@@ -103,7 +110,6 @@ public class TokenMovement {
             Token deletableToken = board.checkBoardPosition(xPosition,yPosition + 1);
             deletedTokens.add(deletableToken);
             board.removePiece(deletableToken);
-            //Log.i("TokenMovement", "Fuck this 3");
         }
 
         //Log.i("TokenMovement: ", xPosition + "  " + yPosition + "  " + board.checkBoardPosition(xPosition,yPosition));
@@ -116,7 +122,6 @@ public class TokenMovement {
             Token deletableToken = board.checkBoardPosition(xPosition,yPosition - 1);
             deletedTokens.add(deletableToken);
             board.removePiece(deletableToken);
-            //Log.i("TokenMovement", "Fuck this 4");
         }
 
 
@@ -128,7 +133,6 @@ public class TokenMovement {
             Token deletableToken = board.checkBoardPosition(xPosition,yPosition - 1);
             deletedTokens.add(deletableToken);
             board.removePiece(deletableToken);
-            Log.i("TokenMovement", "Damn this 1");
         }
 
         if(board.checkBoardPosition(xPosition,yPosition + 1) != null && board.checkBoardPosition(xPosition,yPosition + 2) != null && board.checkBoardPosition(xPosition + 1,yPosition + 1) != null && board.checkBoardPosition(xPosition - 1,yPosition + 1) != null &&
@@ -138,7 +142,6 @@ public class TokenMovement {
             Token deletableToken = board.checkBoardPosition(xPosition,yPosition + 1);
             deletedTokens.add(deletableToken);
             board.removePiece(deletableToken);
-            Log.i("TokenMovement", "Damn this 2");
         }
 
         if(board.checkBoardPosition(xPosition - 1,yPosition) != null && board.checkBoardPosition(xPosition - 2,yPosition) != null && board.checkBoardPosition(xPosition - 1,yPosition + 1) != null && board.checkBoardPosition(xPosition - 1,yPosition - 1) != null &&
@@ -148,7 +151,6 @@ public class TokenMovement {
             Token deletableToken = board.checkBoardPosition(xPosition - 1,yPosition);
             deletedTokens.add(deletableToken);
             board.removePiece(deletableToken);
-            Log.i("TokenMovement", "Damn this 3");
         }
 
         if(board.checkBoardPosition(xPosition + 1,yPosition) != null && board.checkBoardPosition(xPosition + 2,yPosition) != null && board.checkBoardPosition(xPosition + 1,yPosition + 1) != null && board.checkBoardPosition(xPosition + 1,yPosition -1) != null &&
@@ -158,10 +160,6 @@ public class TokenMovement {
             Token deletableToken = board.checkBoardPosition(xPosition +1,yPosition);
             deletedTokens.add(deletableToken);
             board.removePiece(deletableToken);
-            Log.i("TokenMovement", "Damn this 4");
-        }
-        if(deletedTokens.size()>1){
-            Log.i("TokenMovement","More than one thing deleted");
         }
         return deletedTokens;
         // cover the cases for edge trap and multiple edge trap
@@ -190,6 +188,7 @@ public class TokenMovement {
 
             if(this.winner == true){
                 this.winner = false;
+                this.winnerColor = null;
             }
         }
     }
@@ -201,7 +200,11 @@ public class TokenMovement {
         return moves.get(moves.size()-1);
     }
 
-    public boolean getWinner() {
+    public boolean isWinner() {
         return this.winner;
+    }
+
+    public Player.PlayerType getWinnerType(){
+        return this.winnerColor;
     }
 }
