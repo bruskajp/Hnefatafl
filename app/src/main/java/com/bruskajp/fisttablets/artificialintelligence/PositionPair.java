@@ -7,6 +7,6 @@ public class PositionPair{
         this.x=x;
         this.y=y;
     }
-    int x;
-    int y;
+    public int x;
+    public int y;
 }

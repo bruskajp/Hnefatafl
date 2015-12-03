@@ -25,8 +25,12 @@ import android.view.View.OnTouchListener;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Random;
 
+import com.bruskajp.fisttablets.Game.Game;
+import com.bruskajp.fisttablets.Game.SinglePlayerGame;
 import com.bruskajp.fisttablets.R;
 import com.bruskajp.fisttablets.gameengine.Board;
 import com.bruskajp.fisttablets.gameengine.Token;
@@ -38,8 +42,22 @@ public class GameBoard extends Activity{
 
     Button buttonExit;
     ImageView board;
-    Board pieces = new Board();
-    static ImageView kingPiece;
+    Board pieces;
+    private class PieceInfo {
+        public ImageView iv;
+        public int x;
+        public int y;
+        public PieceInfo(ImageView iv, int x, int y){
+            this.iv=iv;
+            this.x=x;
+            this.y=y;
+        }
+    }
+
+    static List<PieceInfo> piecesInfo = new LinkedList<>();
+
+
+    static  ImageView kingPiece;
     static ImageView black1;
     static ImageView black2;
     static ImageView black3;
@@ -49,40 +67,40 @@ public class GameBoard extends Activity{
     static ImageView black7;
     static ImageView black8;
     static ImageView black9;
-    static ImageView black10;
+    static  ImageView black10;
     static ImageView black11;
     static ImageView black12;
     static ImageView black13;
-    ImageView black14;
-    ImageView black15;
-    ImageView black16;
-    ImageView black17;
-    ImageView black18;
-    ImageView black19;
-    ImageView black20;
-    ImageView black21;
-    ImageView black22;
-    ImageView black23;
-    ImageView black24;
-    ImageView white1;
-    ImageView white2;
-    ImageView white3;
-    ImageView white4;
-    ImageView white5;
-    ImageView white6;
-    ImageView white7;
-    ImageView white8;
-    ImageView white9;
-    ImageView white10;
-    ImageView white11;
-    ImageView white12;
+    static ImageView black14;
+    static ImageView black15;
+    static ImageView black16;
+    static ImageView black17;
+    static ImageView black18;
+    static ImageView black19;
+    static ImageView black20;
+    static ImageView black21;
+    static ImageView black22;
+    static ImageView black23;
+    static ImageView black24;
+    static ImageView white1;
+    static ImageView white2;
+    static ImageView white3;
+    static ImageView white4;
+    static ImageView white5;
+    static ImageView white6;
+    static ImageView white7;
+    static ImageView white8;
+    static ImageView white9;
+    static ImageView white10;
+    static ImageView white11;
+    static ImageView white12;
 
     int counterx;
     int countery;
     int top;
     int bottom;
     int psize;
-    boolean editable = true;
+    static boolean editable = true;
     static int[] validx;
     static int[] validy;
 
@@ -230,8 +248,18 @@ public class GameBoard extends Activity{
 
         buttonExit = (Button) findViewById(R.id.exit);
 
+        setBlackBoardPieces();
+        setWhiteBoardPieces();
 
         this.initializeMenu();
+        final GameBoard gb = this;
+        Thread th = new Thread(new Runnable(){
+            @Override
+            public void run(){
+                Game SinglePlayerGame = new SinglePlayerGame(gb);
+            }
+        });
+        th.start();
     }
 
     protected void onResume() {
@@ -599,17 +627,32 @@ public class GameBoard extends Activity{
                 int ycoardinate = validy[0];
                 int count = 0;
                 if (editable && ev.getY() > top && ev.getY() < bottom) {
-                    while(ev.getX() - psize > xcoardinate && count < 11){
+                    while (ev.getX() - psize > xcoardinate && count < 11) {
                         xcoardinate = validx[count++];
                     }
 
                     count = 0;
-                    while(ev.getY() - psize > ycoardinate && count < 11){
+                    while (ev.getY() - psize > ycoardinate && count < 11) {
                         ycoardinate = validy[count++];
                     }
 
 
                     Log.i(LOG_TAG, "ANIMATE!" + xcoardinate + " " + ycoardinate);
+
+                    boolean add = true;
+                    for (int i = 0; i < piecesInfo.size(); ++i) {
+                        PieceInfo pi = piecesInfo.get(i);
+                        if (pi.iv == move) {
+                            add = false;
+                            pi.x = xcoardinate;
+                            pi.y = ycoardinate;
+                            break;
+                        }
+                    }
+                    if (add) {
+                        piecesInfo.add(new PieceInfo(move, xcoardinate, ycoardinate));
+                    }
+
                     move.animate().x(xcoardinate).setDuration(1);
                     move.animate().y(ycoardinate).setDuration(1);
                     editable = false;
@@ -621,11 +664,82 @@ public class GameBoard extends Activity{
         });
     }
 
-    public static void movePieceComputer(int oldX, int oldY, int newX, int newY){
-
-        ImageView move = null;
-        move.animate().x(validx[newX]).setDuration(1);
-        move.animate().y(validy[newY]).setDuration(1);
+    public void movePieceComputer(int oldX, int oldY, int newX, int newY, LinkedList<Token> deletedToks){
+        for(int i = 0 ; i < piecesInfo.size(); ++i){
+            final PieceInfo pi = piecesInfo.get(i);
+            if(pi.x==validx[oldX]&&pi.y==validy[oldY]){
+                pi.x=validx[newX];
+                pi.y=validy[newY];
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        (pi.iv).animate().x(pi.x).setDuration(1);
+                        (pi.iv).animate().y(pi.y).setDuration(1);
+                    }
+                });
+            }
+        }
+        for(Token tok: deletedToks){
+            int x = tok.getxPosition();
+            int y = tok.getyPosition();
+            for(int i = 0 ; i < piecesInfo.size(); ++i){
+                final PieceInfo pi = piecesInfo.get(i);
+                if(pi.x==validx[x] && pi.y==validy[y]){
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            pi.iv.setImageBitmap(null);
+                        }
+                    });
+                    piecesInfo.remove(pi);
+                    break;
+                }
+            }
+        }
     }
 
+    private void setBlackBoardPieces(){
+        piecesInfo.add(new PieceInfo(black1,validx[10],validy[3]));
+        piecesInfo.add(new PieceInfo(black2,validx[10],validy[4]));
+        piecesInfo.add(new PieceInfo(black3,validx[10],validy[5]));
+        piecesInfo.add(new PieceInfo(black4,validx[10],validy[6]));
+        piecesInfo.add(new PieceInfo(black5,validx[10],validy[7]));
+        piecesInfo.add(new PieceInfo(black6,validx[0],validy[3]));
+        piecesInfo.add(new PieceInfo(black7,validx[0],validy[4]));
+        piecesInfo.add(new PieceInfo(black8,validx[0],validy[5]));
+        piecesInfo.add(new PieceInfo(black9,validx[0],validy[6]));
+        piecesInfo.add(new PieceInfo(black10,validx[0],validy[7]));
+        piecesInfo.add(new PieceInfo(black11,validx[5],validy[9]));
+        piecesInfo.add(new PieceInfo(black12,validx[3],validy[10]));
+        piecesInfo.add(new PieceInfo(black13,validx[4],validy[10]));
+        piecesInfo.add(new PieceInfo(black14,validx[5],validy[10]));
+        piecesInfo.add(new PieceInfo(black15,validx[6],validy[10]));
+        piecesInfo.add(new PieceInfo(black16,validx[7],validy[10]));
+        piecesInfo.add(new PieceInfo(black17,validx[9],validy[10]));
+        piecesInfo.add(new PieceInfo(black18,validx[5],validy[1]));
+        piecesInfo.add(new PieceInfo(black19,validx[3],validy[0]));
+        piecesInfo.add(new PieceInfo(black20,validx[4],validy[0]));
+        piecesInfo.add(new PieceInfo(black21,validx[5],validy[0]));
+        piecesInfo.add(new PieceInfo(black22,validx[6],validy[0]));
+        piecesInfo.add(new PieceInfo(black23,validx[7],validy[0]));
+        piecesInfo.add(new PieceInfo(black24,validx[9],validy[5]));
+    }
+
+    private void setWhiteBoardPieces() {
+
+        piecesInfo.add(new PieceInfo(white1,validx[7],validy[5]));
+        piecesInfo.add(new PieceInfo(white2,validx[3],validy[5]));
+        piecesInfo.add(new PieceInfo(white3,validx[6],validy[4]));
+        piecesInfo.add(new PieceInfo(white4,validx[6],validy[5]));
+        piecesInfo.add(new PieceInfo(white5,validx[6],validy[6]));
+        piecesInfo.add(new PieceInfo(white6,validx[4],validy[4]));
+        piecesInfo.add(new PieceInfo(white7,validx[4],validy[5]));
+        piecesInfo.add(new PieceInfo(white8,validx[4],validy[6]));
+        piecesInfo.add(new PieceInfo(white9,validx[5],validy[3]));
+        piecesInfo.add(new PieceInfo(white10,validx[5],validy[4]));
+        piecesInfo.add(new PieceInfo(white11,validx[5],validy[6]));
+        piecesInfo.add(new PieceInfo(white12,validx[5],validy[7]));
+        piecesInfo.add(new PieceInfo(kingPiece,validx[5],validy[5]));
+
+    }
 }

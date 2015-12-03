@@ -25,8 +25,8 @@ public class LocalGame extends Game{
         Player player1 = new HumanPlayer(Player.PlayerType.BLACK);
         Player player2 = new HumanPlayer(Player.PlayerType.WHITE);
 
-        gameConnection1 = new LocalGameConnection(player1);
-        gameConnection2 = new LocalGameConnection(player2);
+        //gameConnection1 = new LocalGameConnection(player1);
+        //gameConnection2 = new LocalGameConnection(player2);
         gameConnection1.beginGame();
         gameConnection2.beginGame();
 

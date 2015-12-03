@@ -14,17 +14,22 @@ import com.bruskajp.fisttablets.userinterface.GameBoard;
 public class LocalGameConnection extends GameConnection{
 
 
-    public LocalGameConnection(Player player) {
+    GameBoard gameBoard ;
+    public LocalGameConnection(Player player, GameBoard gameBoard) {
         super(player);
+        this.gameBoard = gameBoard;
     }
 
     public void sendMove(GameConnection gameConnection, Player player1, Player player2) {
+        Move lastMove = player1.getLastMove();
+        gameBoard.movePieceComputer(lastMove.getPreviousX(), lastMove.getPreviousY(), lastMove.getNewX(), lastMove.getNewY(),lastMove.getDeletedTokens());
+
         gameConnection.receiveMove(player1.getLastMove(), player2);
     }
 
     public void receiveMove(Move lastMove, Player player) {
         player.movePiece(lastMove.getPreviousX(), lastMove.getPreviousY(), lastMove.getNewX(), lastMove.getNewY()); //can use null because it is not used
-        //GameBoard.movePieceComputer(lastMove.getPreviousX(), lastMove.getPreviousY(), lastMove.getNewX(), lastMove.getNewY());
+        gameBoard.movePieceComputer(lastMove.getPreviousX(), lastMove.getPreviousY(), lastMove.getNewX(), lastMove.getNewY(),lastMove.getDeletedTokens());
 
         // add a thing in move that stores the piece number that matches Davids
         // this also means adding a piece number to the token
