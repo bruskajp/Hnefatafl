@@ -73,12 +73,14 @@ public class GameBoard extends Activity{
     ImageView white11;
     ImageView white12;
 
-    float counterx;
-    float countery;
-    float top;
-    float bottom;
+    int counterx;
+    int countery;
+    int top;
+    int bottom;
     int psize;
     boolean editable = true;
+    int[] validx;
+    int[] validy;
 
     private final static String LOG_TAG = "GameBoard";
     @Override
@@ -90,21 +92,25 @@ public class GameBoard extends Activity{
         setContentView(R.layout.boardgame);
         board = (ImageView) findViewById(R.id.board);
 
-        psize = 66;
+        psize = (int)Math.ceil(getWindowManager().getDefaultDisplay().getWidth() / 11.0);
+
         int pieceSize = psize;
         kingPiece = (ImageView) findViewById(R.id.kingpiece);
 
         kingPiece.getLayoutParams().height = pieceSize;
         kingPiece.getLayoutParams().width = pieceSize;
 
-        float left_side = psize/2;
+        int left_side = (int)Math.ceil(psize/2.0);
+        Log.i(LOG_TAG, pieceSize + "; " + left_side);
         top = (getWindowManager().getDefaultDisplay().getHeight()/2) - (getWindowManager().getDefaultDisplay().getWidth() / 2) - left_side;
         bottom = (getWindowManager().getDefaultDisplay().getHeight()/2) + (getWindowManager().getDefaultDisplay().getWidth() / 2) - left_side;
         counterx = 0;
         countery = top;
 
-
-
+        int[] array = {0, psize, psize * 2, psize * 3, psize * 4, psize * 5, psize * 6, psize * 7, psize * 8, psize * 9, psize * 10};
+        validx = array;
+        int[] array1 = {top, top + psize, top + psize * 2, top + psize * 3, top + psize * 4, top + psize * 5, top + psize * 6, top + psize * 7, top + psize * 8, top + psize * 9, top + psize * 10};
+        validy = array1;
 
         black1 = (ImageView) findViewById(R.id.black1);
         black2 = (ImageView) findViewById(R.id.black2);
@@ -584,13 +590,28 @@ public class GameBoard extends Activity{
 
         parent.setOnTouchListener(new OnTouchListener() {
             public boolean onTouch(View v, MotionEvent ev) {
-                if(editable){
-                    move.animate().x(ev.getX()).setDuration(1);
-                    move.animate().y(ev.getY()).setDuration(1);
+                Log.i(LOG_TAG, "Touch at " + ev.getX() + ", " + ev.getY());
+                int xcoardinate = validx[0];
+                int ycoardinate = validy[0];
+                int count = 0;
+                if (editable && ev.getY() > top && ev.getY() < bottom) {
+                    while(ev.getX() - psize > xcoardinate && count < 11){
+                        xcoardinate = validx[count++];
+                    }
+
+                    count = 0;
+                    while(ev.getY() - psize > ycoardinate && count < 11){
+                        ycoardinate = validy[count++];
+                    }
+
+
+                    Log.i(LOG_TAG, "ANIMATE!" + xcoardinate + " " + ycoardinate);
+                    move.animate().x(xcoardinate).setDuration(1);
+                    move.animate().y(ycoardinate).setDuration(1);
                     editable = false;
                 }
 
-                Log.i(LOG_TAG, "Touch at " + ev.getX() + ", " + ev.getY());
+
                 return true;
             }
         });
