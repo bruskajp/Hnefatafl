@@ -29,10 +29,26 @@ The number of white captures is subtracted from the number of white captures, an
 \section{Implementation}
 
 \subsection{Task Allocation}
-James: Game Logic\newline
-Jacob: AI\newline
-David: GUI\newline
+James: Game Logic
+\begin{itemize}
+  \item Has the most experience with android development and wants to learn other parts of Java
+  \item Due to the android experience, knows how to structure the code and create the design
+\end{itemize}\newline
+Jacob: Artificial Intelligence
+\begin{itemize}
+  \item 
+  \item 
+\end{itemize}\newline
+David: Graphical User Interface
+\begin{itemize}
+  \item 
+  \item 
+\end{itemize}\newline
 Benjamin: Networking, Documentation, and Report management
+\begin{itemize}
+  \item 
+  \item 
+\end{itemize}\newline
 
 \subsection{Tools}
 Benjamin do this (Android Studio)
@@ -54,19 +70,26 @@ Benjamin do this (Android Studio)
               19
         20 21 22 23 24
 
-	When you want to move a piece you have to first click on it to select it. This enables you to be able to select on anywhere on the beard to then move that piece. Where ever you touch if it is a valid place to move the piece will move to that place. This is accomplished by having a on touch command on every piece which is essentially an imageview. When a valid movement place is selected the image view is then moved to that position on the board. The most puzzling part of the GUI was that the movement of the pieces was taking a very long time to happen for no apparent reason. This was discovered when one of the team was working on a virtual machine. Each piece was using an image that was 960 by 960 pixels large for a game piece that was approximately 40 by 40 pixels large. When the image for the pieces was scaled down to 400 by 400 the animation became very snappy and responsive making the game much more playable than before. 
+	When you want to move a piece you have to first click on it to select it. This enables you to be able to select on anywhere on the beard to then move that piece. Where ever you touch if it is a valid place to move the piece will move to that place. This is accomplished by having a on touch command on every piece which is essentially an imageview. When a valid movement place is selected the image view is then moved to that position on the board. This was implemented using the Publisher Subscriber Pattern where each piece was a subscriber with its own listener. 
+	The most puzzling part of the GUI was that the movement of the pieces was taking a very long time to happen for no apparent reason. This was discovered when one of the team was working on a virtual machine. Each piece was using an image that was 960 by 960 pixels large for a game piece that was approximately 40 by 40 pixels large. When the image for the pieces was scaled down to 400 by 400 the animation became very snappy and responsive making the game much more playable than before. 
 
 \subsubsection{Game Logic}
-James do this
+	The game logic is split into many parts similar to the way the real world functions. There is the board and its pieces. The player, who is in a game, makes moves following some set of rules. This layout is what the implementation tried to follow.
+	Firstly, there is a \textit{Token} class. This only holds the information of each board piece such as its color and position. Then there is a \textit{Board} class. This is the board state including what tokens are on the board, their positions, and the ability change these things. Next is the \textit{Move} class which just holds the information about a move (old position, new position, and the deleted tokens). There is also a \textit{TokenMovement} class. This describes all of the legal moves that a token can make. It records the previous moves that were made and deletes the tokens that need to be. It also has the responsibility of doing an undo action. It essentially holds all of the game rules. 
+	The next layer of the design is the players. There is a \textit{Player} class which establishes the basics of a player (things that all players should have). There are then two types of players, the \textit{HumanPlayer} and the \textit{ComputerPlayer}. The human player is used for the human based interaction with the game. The computer player is used for the artificial intelligence to interact with the game. There is also the \textit{PlayerInformation} class which holds all of the information about a player. This is implemented using the Strategy Pattern. I does not have any subclasses because of the way the code was developed, but it could have other information for different types of players. It was then composed within the \textit{Player} class and established within each type of player. There is also a \textit{PlayerMovement} class which can be used in then future if the project gets larger or changes. It would implemented similar to the \textit{PlayerInformation} class and would be used if different players or objects could have different allowable moves (knight and queen in chess).
+	At the highest layer of the design is the game. The players are a part of the game. The is first a \textit{Game} base class. There is then the three game types that extend it: \textit{DemoGame}, \textit{LocalGame}, and \textit{SinglePlayerGame}. The different games contain their own networks and their own players. The demo game contains two computer players that fight each other over a local network. The local game has two human players that fight each other over a local connection. Finally, the single player game has a human player a computer player that both fight over a local connection. This structure of games, players, boards, and tokens allows for a complete architecture that is easy to understand and can be expanded upon easily. 
 
 \subsubsection{AI}
 Jacob do this
 
 \subsubsection{Networking}
 Benjamin do this
+Your network uses the strategy pattern
 
 \subsection{Testing}
-James \& Jacob do this
+	The game was incredibly difficult to debug. This is due to the fact that the game logic needed an outside input in order to test. The game's artificial intelligence also needed to the game logic to be working to run at all. Thus the game logic and artificial intelligence were intertwined. 
+	The testing was done with the use of the Android Studio debugging tool. More specifically, due to the human interface of the program having errors, the game logic and artificial intelligence were tested and debugged at the same time. Two computers were put into a demo and they battled each other. There were log statements that occurred when certain actions, such as a move, took place. This allowed the debuggers to watch the game state as it changed. There were also log statements within if statements to inform the debuggers if an error occurred. The combination of all the log statements allowed for a quick assessment of what error occurred and what led to this error. 
+	Later in the process, when the program was having more niche errors, a text version of the board was displayed. This was used because it was so simple that there was very little risk of having an error in the display. It allowed the overall board state to be more easily seen and analyzed.
 
 \subsection{UML}
 James do this
