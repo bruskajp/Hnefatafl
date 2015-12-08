@@ -11,6 +11,10 @@ import java.util.List;
 import java.util.LinkedList;
 import java.util.Map;
 
+/**
+ * Created by meliteja on 11/3/15
+ */
+
 public class ComputerPlayerOptions{
 
     Board board;

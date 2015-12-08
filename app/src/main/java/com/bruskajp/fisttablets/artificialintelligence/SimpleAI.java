@@ -9,6 +9,10 @@ import com.bruskajp.fisttablets.player.Player;
 
 import java.util.List;
 
+/**
+ * Created by meliteja on 11/3/15
+ */
+
 public class SimpleAI implements ArtificialIntelligence{
 
     ComputerPlayerOptions cpOptions;

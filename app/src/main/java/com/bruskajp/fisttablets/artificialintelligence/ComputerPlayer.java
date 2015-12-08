@@ -5,8 +5,10 @@ import android.util.Log;
 import com.bruskajp.fisttablets.player.Player;
 
 /**
- * Created by damonster on 10/10/15.
+ * Created by damonster on 10/10/15
+ * Worked on by meliteja
  */
+
 public class ComputerPlayer extends Player{
 
     private final static String LOG_TAG = "ComputerPlayer";

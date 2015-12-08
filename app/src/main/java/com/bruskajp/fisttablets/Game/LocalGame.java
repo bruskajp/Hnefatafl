@@ -6,6 +6,7 @@ import com.bruskajp.fisttablets.networking.GameConnection;
 import com.bruskajp.fisttablets.networking.LocalGameConnection;
 import com.bruskajp.fisttablets.player.HumanPlayer;
 import com.bruskajp.fisttablets.player.Player;
+import com.bruskajp.fisttablets.userinterface.GameBoard;
 
 /**
  * Created by damonster on 11/18/15.
@@ -15,15 +16,20 @@ public class LocalGame extends Game{
 
     GameConnection gameConnection1;
     GameConnection gameConnection2;
+    GameBoard gameBoard;
 
-    public LocalGame(){
+    public Player player1;
+    public Player player2;
+
+    public LocalGame(GameBoard gameBoard){
+        this.gameBoard = gameBoard;
         initializeGame();
     }
 
     @Override
     void initializeGame(){
-        Player player1 = new HumanPlayer(Player.PlayerType.BLACK);
-        Player player2 = new HumanPlayer(Player.PlayerType.WHITE);
+        player1 = new HumanPlayer(Player.PlayerType.BLACK);
+        player2 = new HumanPlayer(Player.PlayerType.WHITE);
 
         //gameConnection1 = new LocalGameConnection(player1);
         //gameConnection2 = new LocalGameConnection(player2);

@@ -30,7 +30,7 @@ public class PlayerInformation {
         return turnNumber;
     }
 
-    public Boolean IsTurn() {
+    public Boolean isTurn() {
         return isTurn;
     }
 

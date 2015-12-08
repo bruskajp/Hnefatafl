@@ -18,13 +18,17 @@ public class HumanPlayer extends Player {
 
     }
 
+    public boolean isTurn(){
+        return playerInformation.isTurn();
+    }
+
     @Override
     public void takeTurn() {
-        if(playerInformation.IsTurn()){
-            //  I don't know if this is needed because it is dealt with by the game.
+        playerInformation.isTurn = true;
+    }
 
-            // Look for the movement stuff (Listener)
-        }
+    public void finishTurn() {
+        playerInformation.isTurn = false;
     }
 
 }

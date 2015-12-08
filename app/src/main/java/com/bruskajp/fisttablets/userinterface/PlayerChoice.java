@@ -9,27 +9,25 @@ import android.view.View;
 import android.widget.Button;
 
 import com.bruskajp.fisttablets.R;
-import com.bruskajp.fisttablets.networking.NetworkManager;
+import com.bruskajp.fisttablets.player.Player;
 
 /**
- * Created by damonster on 10/10/15.
+ * Created by damonster on 12/7/15.
  */
-public class MainMenu extends Activity{
+public class PlayerChoice extends Activity{
 
-    Button buttonStartLocalGame;
-    Button buttonStartSinglePlayerGame;
-    Button buttonStartDemo;
+    Button buttonWhitePlayer;
+    Button buttonBlackPlayer;
 
     private final static String LOG_TAG = "MainMenu";
 
-    public MainMenu() {}
+    public PlayerChoice() {}
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
         //String value = intent.getStringExtra("this worked");
-
         this.initializeMenu();
     }
 
@@ -71,42 +69,34 @@ public class MainMenu extends Activity{
 
     public void initializeMenu(){
         setContentView(R.layout.activity_main);
-        buttonStartLocalGame = (Button) findViewById(R.id.buttonStartLocalGame);
-        buttonStartLocalGame.setOnClickListener(new View.OnClickListener() {
+
+        buttonWhitePlayer  = (Button) findViewById(R.id.buttonWhitePlayer);
+        buttonWhitePlayer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 Intent myIntent = new Intent(v.getContext(), GameBoard.class);
-                myIntent.putExtra("players", 2);
+                myIntent.putExtra("color", "black");
+                myIntent.putExtra("players", 1);
                 startActivityForResult(myIntent, 0);
 
             }
         });
 
-        buttonStartSinglePlayerGame = (Button) findViewById(R.id.buttonStartSinglePlayerGame);
-        buttonStartSinglePlayerGame.setOnClickListener(new View.OnClickListener() {
+        buttonBlackPlayer = (Button) findViewById(R.id.buttonBlackPlayer);
+        buttonBlackPlayer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Log.i(LOG_TAG, "This is how a button works and how to log things to console");
 
-                Intent myIntent = new Intent(v.getContext(), PlayerChoice.class);
+                Intent myIntent = new Intent(v.getContext(), GameBoard.class);
+                myIntent.putExtra("color", "white");
+                myIntent.putExtra("players", 1);
                 startActivityForResult(myIntent, 0);
 
             }
         });
 
-
-        buttonStartDemo = (Button) findViewById(R.id.buttonStartDemo);
-        buttonStartDemo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent myIntent = new Intent(v.getContext(), GameBoard.class);
-                myIntent.putExtra("players", 0);
-                startActivity(myIntent);
-
-            }
-        });
     }
 
 }

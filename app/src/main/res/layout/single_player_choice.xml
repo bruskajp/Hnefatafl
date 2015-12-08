@@ -5,38 +5,29 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
 
-    <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
+    <TextView android:text="Pick a color" android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView"
-        android:layout_above="@+id/buttonStartLocalGame"
+        android:layout_above="@+id/buttonWhitePlayer"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="56dp"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Start Local Game"
-        android:id="@+id/buttonStartLocalGame"
-        android:layout_above="@+id/buttonStartSinglePlayerGame"
+        android:text="White player"
+        android:id="@+id/buttonWhitePlayer"
+        android:layout_above="@+id/buttonBlackPlayer"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="44dp" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Start Single Player Game"
-        android:id="@+id/buttonStartSinglePlayerGame"
+        android:text="Black Player"
+        android:id="@+id/buttonBlackPlayer"
         android:layout_marginBottom="188dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Start Demo"
-        android:id="@+id/buttonStartDemo"
-        android:layout_marginBottom="88dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
