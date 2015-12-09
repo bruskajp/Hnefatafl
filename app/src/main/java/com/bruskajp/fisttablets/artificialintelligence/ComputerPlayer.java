@@ -19,12 +19,6 @@ public class ComputerPlayer extends Player{
         ai = new SimpleAI(board,tokenMovement,playerType);
     }
 
-
-    // HEY JACOB, LOOK AT THIS FUNCTION
-    // use this to make your actual move.
-    // I think this is all I need to do to implement it.
-
-
     @Override
     public void takeTurn() {
         makeNextMove();
