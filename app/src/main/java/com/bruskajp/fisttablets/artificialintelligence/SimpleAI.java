@@ -247,57 +247,5 @@ public class SimpleAI implements ArtificialIntelligence{
         return ((xPos>(boardDimension/2)) ? boardDimension-xPos : xPos )
                 + ((yPos>(boardDimension/2)) ? boardDimension-yPos : yPos);
     }
-    /***
-     * Performs a breadth-first-search of depth 1, using {@code moves} to determine what moves to make.
-     * @param root The root of the tree to perform BFS on.
-     * @param moves The {@code List<MovementData>} to draw moves from.
-     * @return A sorted in ascending order {@code List<NodeData>} of evaluated moves.
-     */
-  /*  protected List<NodeData> breadthFirstSearch(Node<NodeData> root, List<MovementData> moves){
-        //HACK:: Perhaps use a double-ended priority queue here
-        int necessaryUndoes = prepareBoard(root);
-        List<NodeData> nodes = new ArrayList<>(moves.size());
-        for(MovementData move : moves){
-            tokenMovement.movePiece(move.tok,move.coordinates.x,move.coordinates.y);
-            nodes.add(new NodeData(evaluate(board),move));
-            tokenMovement.undo();
-        }
-        undo(necessaryUndoes);
-        Collections.sort(nodes);
-        return nodes;
-    }*/
-
-    /***
-     * Moves tokens using the data of all nodes up to the root of the tree, including {@code node}.
-     * @param node The node to prepare the board to.
-     * @return The number of moves taken to set the board up to this point.
-     */
-    /*private int prepareBoard(Node<NodeData> node){
-        // initialize a stack of moves, since the moves need to be done in order from the top of the tree.
-        Stack<MovementData> moves= new Stack<>();
-        while(node.getParent()!=null){
-            moves.add(node.getData().movementData);
-            node=node.getParent();
-        }
-
-        int counter = moves.size();
-
-        // Set the board up to the necessary board state to do BFS on the node
-        while(!moves.empty()){
-            MovementData move = moves.pop();
-            tokenMovement.movePiece(move.tok,move.coordinates.x,move.coordinates.y);
-        }
-
-        return counter;
-    }*/
-
-    /***
-     * Calls undo on {@code tokenMovement} {@code numUndoes} times.
-     * @param numUndoes The number of times to call undo.
-     */
-  /*  private void undo(int numUndoes){
-        for(;numUndoes>0;--numUndoes) tokenMovement.undo();
-    }*/
-
 
 }
