@@ -61,7 +61,7 @@ public class SinglePlayerGame extends Game{
                     gameBoard.newYPos = gameBoardLastYPos;
                     while(gameBoard.newXPos == gameBoardLastXPos && gameBoard.newYPos == gameBoardLastYPos){}
                     Log.e("SinglePlayerGame", gameBoard.newXPos + "  " + gameBoard.lastXPos + "  " + gameBoard.newYPos + "  " + gameBoard.lastYPos + "\n");
-                }while(!player2.movePiece(gameBoard.lastXPos, gameBoard.lastYPos, gameBoard.newXPos, gameBoard.newYPos));
+                }while(!player2.moveHumanPiece(gameBoard.lastXPos, gameBoard.lastYPos, gameBoard.newXPos, gameBoard.newYPos));
                 Log.e("SinglePlayerGame", gameBoard.newXPos + "  " + gameBoard.newYPos + "\n");
                 gameBoardLastXPos = gameBoard.newXPos;
                 gameBoardLastYPos = gameBoard.newYPos;
@@ -90,7 +90,7 @@ public class SinglePlayerGame extends Game{
                     gameBoard.newXPos = gameBoardLastXPos;
                     gameBoard.newYPos = gameBoardLastYPos;
                     while(gameBoard.newXPos == gameBoardLastXPos && gameBoard.newYPos == gameBoardLastYPos){}
-                }while(player2.movePiece(gameBoard.lastXPos, gameBoardLastYPos, gameBoard.newXPos, gameBoard.newYPos));
+                }while(player2.moveHumanPiece(gameBoard.lastXPos, gameBoardLastYPos, gameBoard.newXPos, gameBoard.newYPos));
                 gameBoardLastXPos = gameBoard.newXPos;
                 gameBoardLastYPos = gameBoard.newYPos;
                 gameBoard.lastXPos = gameBoard.newXPos;

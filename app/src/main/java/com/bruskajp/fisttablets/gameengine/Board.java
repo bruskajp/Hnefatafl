@@ -13,6 +13,8 @@ public class Board {
 
     public Token board[][];
     private HashSet<Token> remainingPieces;
+    public int remainingWhitePieces = 24;
+    public int remainingBlackPieces = 13;
     private final static String LOG_TAG = "Board";
     public boolean winner = false;
     public final static int INITIAL_NUMBER_OF_WHITE_TOKENS = 13;

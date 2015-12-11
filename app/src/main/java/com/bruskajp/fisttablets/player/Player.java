@@ -44,11 +44,16 @@ public abstract class Player {
         }
         return false;
     }
+
     public boolean movePiece(Token token, int xPosition, int yPosition){
         if (tokenMovement.movePiece(token, xPosition, yPosition)){
             return true;
         }
         return false;
+    }
+
+    public boolean moveHumanPiece(int oldXPosition, int oldYPosition, int newXPosition, int newYPosition){
+        return tokenMovement.moveHumanPiece(oldXPosition, oldYPosition, newXPosition, newYPosition);
     }
 
     public void undo(){

@@ -48,7 +48,7 @@ public class LocalGame extends Game{
                 gameBoard.newYPos = gameBoardLastYPosBlack;
                 while(gameBoard.newXPos == gameBoardLastXPosBlack && gameBoard.newYPos == gameBoardLastYPosBlack){}
                 Log.e("SinglePlayerGame", gameBoard.newXPos + "  " + gameBoard.lastXPos + "  " + gameBoard.newYPos + "  " + gameBoard.lastYPos + "\n");
-            }while(!player1.movePiece(gameBoard.lastXPos, gameBoard.lastYPos, gameBoard.newXPos, gameBoard.newYPos));
+            }while(!player1.moveHumanPiece(gameBoard.lastXPos, gameBoard.lastYPos, gameBoard.newXPos, gameBoard.newYPos));
             Log.e("SinglePlayerGame", gameBoard.newXPos + "  " + gameBoard.newYPos + "\n");
             gameBoardLastXPosBlack = gameBoard.newXPos;
             gameBoardLastYPosBlack = gameBoard.newYPos;
@@ -68,7 +68,7 @@ public class LocalGame extends Game{
                 gameBoard.newYPos = gameBoardLastYPosWhite;
                 while(gameBoard.newXPos == gameBoardLastXPosWhite && gameBoard.newYPos == gameBoardLastYPosWhite){}
                 Log.e("SinglePlayerGame", gameBoard.newXPos + "  " + gameBoard.lastXPos + "  " + gameBoard.newYPos + "  " + gameBoard.lastYPos + "\n");
-            }while(!player2.movePiece(gameBoard.lastXPos, gameBoard.lastYPos, gameBoard.newXPos, gameBoard.newYPos));
+            }while(!player2.moveHumanPiece(gameBoard.lastXPos, gameBoard.lastYPos, gameBoard.newXPos, gameBoard.newYPos));
             Log.e("SinglePlayerGame", gameBoard.newXPos + "  " + gameBoard.newYPos + "\n");
             gameBoardLastXPosWhite = gameBoard.newXPos;
             gameBoardLastYPosWhite = gameBoard.newYPos;
