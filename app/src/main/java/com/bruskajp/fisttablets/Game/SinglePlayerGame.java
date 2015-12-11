@@ -59,7 +59,15 @@ public class SinglePlayerGame extends Game{
                     gameBoard.whiteTurn = true;
                     gameBoard.newXPos = gameBoardLastXPos;
                     gameBoard.newYPos = gameBoardLastYPos;
-                    while(gameBoard.newXPos == gameBoardLastXPos && gameBoard.newYPos == gameBoardLastYPos){}
+                    while(gameBoard.newXPos == gameBoardLastXPos && gameBoard.newYPos == gameBoardLastYPos){
+                        synchronized (this){
+                            try {
+                                wait(50);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
                     Log.e("SinglePlayerGame", gameBoard.newXPos + "  " + gameBoard.lastXPos + "  " + gameBoard.newYPos + "  " + gameBoard.lastYPos + "\n");
                 }while(!player2.moveHumanPiece(gameBoard.lastXPos, gameBoard.lastYPos, gameBoard.newXPos, gameBoard.newYPos));
                 Log.e("SinglePlayerGame", gameBoard.newXPos + "  " + gameBoard.newYPos + "\n");
@@ -89,9 +97,16 @@ public class SinglePlayerGame extends Game{
                     gameBoard.blackTurn = true;
                     gameBoard.newXPos = gameBoardLastXPos;
                     gameBoard.newYPos = gameBoardLastYPos;
-                    while(gameBoard.newXPos == gameBoardLastXPos && gameBoard.newYPos == gameBoardLastYPos){}
+                    while(gameBoard.newXPos == gameBoardLastXPos && gameBoard.newYPos == gameBoardLastYPos){
+                        synchronized (this){
+                            try {
+                                wait(50);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
                 }while(!player2.moveHumanPiece(gameBoard.lastXPos, gameBoard.lastYPos, gameBoard.newXPos, gameBoard.newYPos));
-                Log.e("SinglePlayerGame", gameBoard.newXPos + "  " + gameBoard.newYPos + "\n");
                 gameBoardLastXPos = gameBoard.newXPos;
                 gameBoardLastYPos = gameBoard.newYPos;
                 gameBoard.lastXPos = gameBoard.newXPos;
