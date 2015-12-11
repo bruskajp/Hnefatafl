@@ -31,14 +31,20 @@ public class DemoGame extends Game{
         gameConnection2 = new LocalGameConnection(player2, gameBoard);
         gameConnection1.beginGame();
         gameConnection2.beginGame();
-
+        synchronized(this){
+            try {
+                wait(10000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
         while(!player1.isWinner() && !player2.isWinner()){
 
             player1.takeTurn();
             gameConnection1.sendMove(gameConnection2, player1, player2);
             synchronized (this) {
                 try {
-                    wait(1000);
+                    wait(1500);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -48,7 +54,7 @@ public class DemoGame extends Game{
             gameConnection2.sendMove(gameConnection1, player2, player1);
             synchronized (this) {
                 try {
-                    wait(1000);
+                    wait(1500);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

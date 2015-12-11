@@ -40,6 +40,7 @@ public class GameBoard extends Activity{
         public ImageView iv;
         public int x;
         public int y;
+        public boolean firstMove = true; // Used to make the human player touch work
         public PieceInfo(ImageView iv, int x, int y){
             this.iv=iv;
             this.x=x;
@@ -288,9 +289,9 @@ public class GameBoard extends Activity{
             });
         }
 
-        thread.start();
 
         this.initializeMenu();
+        thread.start();
     }
 
     protected void onResume() {
@@ -708,11 +709,21 @@ public class GameBoard extends Activity{
 
             count = 0;
             while (move.getY() - psize > ycoardinate && count < 11) {
-                ycoardinate = validy[++count];
+                ycoardinate = validy[count++];
             }
-            //if(count != 0){
-            //    --count;
-            //}
+            // Hack around an off by one error
+            for(int i = 0 ; i <piecesInfo.size() ; ++i){
+                PieceInfo pi = piecesInfo.get(i);
+                if(pi.iv == move){
+                    if(pi.firstMove){
+                        pi.firstMove = false;
+                        if(count != 0){
+                            --count;
+                        }
+                    }
+                    break;
+                }
+            }
             lastYPos = count;
             Log.e("GameBoard1", "  " + lastXPos + " " + lastYPos);
         }
