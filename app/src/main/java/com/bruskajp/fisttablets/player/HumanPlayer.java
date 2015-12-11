@@ -7,15 +7,6 @@ public class HumanPlayer extends Player {
 
     public HumanPlayer(PlayerType playerType) {
         super(playerType);
-
-
-
-        /* This is the on touch listener stuff
-
-            BoardListener boardListener = new BoardListener();
-
-         */
-
     }
 
     public boolean isTurn(){
@@ -27,6 +18,7 @@ public class HumanPlayer extends Player {
         playerInformation.isTurn = true;
     }
 
+    @Override
     public void finishTurn() {
         playerInformation.isTurn = false;
     }

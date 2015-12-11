@@ -22,7 +22,9 @@ public class LocalGameConnection extends GameConnection{
 
     public void sendMove(GameConnection gameConnection, Player player1, Player player2) {
         Move lastMove = player1.getLastMove();
+        Log.i("LocalGameConnection", " " + lastMove.getPreviousX() + " " + lastMove.getPreviousY() + " " + lastMove.getNewX() + " " + lastMove.getNewY());
         gameBoard.movePieceComputer(lastMove.getPreviousX(), lastMove.getPreviousY(), lastMove.getNewX(), lastMove.getNewY(),lastMove.getDeletedTokens());
+        Log.i("LocalGameConnection", " " + lastMove.getPreviousX() + " " + lastMove.getPreviousY() + " " + lastMove.getNewX() + " " + lastMove.getNewY());
 
         gameConnection.receiveMove(player1.getLastMove(), player2);
     }

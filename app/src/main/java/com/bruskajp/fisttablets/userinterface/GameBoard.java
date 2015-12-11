@@ -48,7 +48,7 @@ public class GameBoard extends Activity{
 
     static List<PieceInfo> piecesInfo = new LinkedList<>();
 
-    static  ImageView kingPiece;
+    static ImageView kingPiece;
     static ImageView black1;
     static ImageView black2;
     static ImageView black3;
@@ -58,7 +58,7 @@ public class GameBoard extends Activity{
     static ImageView black7;
     static ImageView black8;
     static ImageView black9;
-    static  ImageView black10;
+    static ImageView black10;
     static ImageView black11;
     static ImageView black12;
     static ImageView black13;
@@ -95,12 +95,18 @@ public class GameBoard extends Activity{
     static int[] validx;
     static int[] validy;
 
+    public int lastXPos = -1;
+    public int lastYPos = -1;
+    public int newXPos = -1;
+    public int newYPos = -1;
+
     public String playerColor;
+    public boolean whiteTurn = false;
+    public boolean blackTurn = false;
 
     private final static String LOG_TAG = "GameBoard";
 
     Intent myIntent;
-    Game localGame;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -255,6 +261,7 @@ public class GameBoard extends Activity{
         Thread thread;
 
         myIntent =  getIntent();
+
         playerColor = (String) myIntent.getExtras().get("color");
 
         if((Integer) myIntent.getExtras().get("players") == 0){
@@ -272,8 +279,12 @@ public class GameBoard extends Activity{
                 }
             });
         } else {
-            localGame = new LocalGame(gb);
-            thread = null;
+            thread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    Game localGame = new LocalGame(gb);
+                }
+            });
         }
 
         thread.start();
@@ -320,314 +331,8 @@ public class GameBoard extends Activity{
 
     public void initializeMenu() {
 
-        if ((Integer) myIntent.getExtras().get("players") == 1 || (Integer) myIntent.getExtras().get("players") == 2) {
-
-            kingPiece.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(localGame.player1.moveplayer()){
-                        Log.i(LOG_TAG, "king pressed");
-                        movePiece(kingPiece);
-                    }
-                }
-            });
-
-            black1.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    Log.i(LOG_TAG, "black1");
-                    movePiece(black1);
-                }
-            });
-
-            black2.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    Log.i(LOG_TAG, "black2");
-                    movePiece(black2);
-
-                }
-            });
-
-            black3.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    Log.i(LOG_TAG, "black3");
-                    movePiece(black3);
-
-                }
-            });
-
-            black4.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    Log.i(LOG_TAG, "black4");
-                    movePiece(black4);
-
-                }
-            });
-
-            black5.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    Log.i(LOG_TAG, "black5");
-                    movePiece(black5);
-
-                }
-            });
-
-            black6.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    Log.i(LOG_TAG, "black6");
-                    movePiece(black6);
-
-                }
-            });
-
-            black7.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    Log.i(LOG_TAG, "black7");
-                    movePiece(black7);
-                }
-            });
-
-            black8.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    Log.i(LOG_TAG, "black8");
-                    movePiece(black8);
-                }
-            });
-
-            black9.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    Log.i(LOG_TAG, "black9");
-                    movePiece(black9);
-                }
-            });
-
-            black10.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    Log.i(LOG_TAG, "black10");
-                    movePiece(black10);
-                }
-            });
-
-            black11.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    Log.i(LOG_TAG, "black11");
-                    movePiece(black11);
-                }
-            });
-
-            black12.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    Log.i(LOG_TAG, "black12");
-                    movePiece(black12);
-                }
-            });
-
-            black13.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    Log.i(LOG_TAG, "black13");
-                    movePiece(black13);
-                }
-            });
-
-            black14.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    Log.i(LOG_TAG, "black14");
-                    movePiece(black14);
-                }
-            });
-
-            black15.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    Log.i(LOG_TAG, "black15");
-                    movePiece(black15);
-                }
-            });
-
-            black16.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    Log.i(LOG_TAG, "black16");
-                    movePiece(black16);
-                }
-            });
-
-            black17.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    Log.i(LOG_TAG, "black17");
-                    movePiece(black17);
-                }
-            });
-
-            black18.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    Log.i(LOG_TAG, "black18");
-                    movePiece(black18);
-                }
-            });
-
-            black19.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    Log.i(LOG_TAG, "black19");
-                    movePiece(black19);
-                }
-            });
-
-            black20.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    Log.i(LOG_TAG, "black20");
-                    movePiece(black20);
-                }
-            });
-
-            black21.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    Log.i(LOG_TAG, "black21");
-                    movePiece(black21);
-                }
-            });
-
-            black22.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    Log.i(LOG_TAG, "black22");
-                    movePiece(black22);
-                }
-            });
-
-            black23.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    Log.i(LOG_TAG, "black23");
-                    movePiece(black23);
-                }
-            });
-
-            black24.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    Log.i(LOG_TAG, "black24");
-                    movePiece(black24);
-                }
-            });
-
-            white1.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    Log.i(LOG_TAG, "white1");
-                    movePiece(white1);
-                }
-            });
-
-            white2.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    Log.i(LOG_TAG, "white2");
-                    movePiece(white2);
-                }
-            });
-
-            white3.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    Log.i(LOG_TAG, "white3");
-                    movePiece(white3);
-                }
-            });
-
-            white4.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    Log.i(LOG_TAG, "white4");
-                    movePiece(white4);
-                }
-            });
-
-            white5.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    Log.i(LOG_TAG, "white5");
-                    movePiece(white5);
-                }
-            });
-
-            white6.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    Log.i(LOG_TAG, "white6");
-                    movePiece(white6);
-                }
-            });
-
-
-            white7.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    Log.i(LOG_TAG, "white7");
-                    movePiece(white7);
-                }
-            });
-
-            white8.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    Log.i(LOG_TAG, "white8");
-                    movePiece(white8);
-                }
-            });
-
-
-            white9.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    Log.i(LOG_TAG, "white9");
-                    movePiece(white9);
-                }
-            });
-
-            white10.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    Log.i(LOG_TAG, "white10");
-                    movePiece(white10);
-                }
-            });
-
-            white11.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    Log.i(LOG_TAG, "white11");
-                    movePiece(white11);
-                }
-            });
-
-            white12.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    Log.i(LOG_TAG, "white12");
-                    movePiece(white12);
-                }
-            });
-        }
-
+        initializeWhitePieceListeners();
+        initializeBlackPieceListeners();
 
         buttonExit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -640,9 +345,376 @@ public class GameBoard extends Activity{
         });
     }
 
+    public void initializeWhitePieceListeners() {
+        if ((Integer) myIntent.getExtras().get("players") == 1 || (Integer) myIntent.getExtras().get("players") == 2) {
+
+            kingPiece.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.i(LOG_TAG, "king pressed");
+                    if(whiteTurn == true) movePiece(kingPiece);
+                    whiteTurn = false;
+                }
+            });
+
+            white1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.i(LOG_TAG, "white1");
+                    if(whiteTurn == true) movePiece(white1);
+                    whiteTurn = false;
+                }
+            });
+
+            white2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.i(LOG_TAG, "white2");
+                    if(whiteTurn == true) movePiece(white2);
+                    whiteTurn = false;
+                }
+            });
+
+            white3.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.i(LOG_TAG, "white3");
+                    if(whiteTurn == true) movePiece(white3);
+                    whiteTurn = false;
+                }
+            });
+
+            white4.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.i(LOG_TAG, "white4");
+                    if(whiteTurn == true) movePiece(white4);
+                    whiteTurn = false;
+                }
+            });
+
+            white5.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.i(LOG_TAG, "white5");
+                    if(whiteTurn == true) movePiece(white5);
+                    whiteTurn = false;
+                }
+            });
+
+            white6.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.i(LOG_TAG, "white6");
+                    if(whiteTurn == true) movePiece(white6);
+                    whiteTurn = false;
+                }
+            });
+
+            white7.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.i(LOG_TAG, "white7");
+                    if(whiteTurn == true) movePiece(white7);
+                    whiteTurn = false;
+                }
+            });
+
+            white8.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.i(LOG_TAG, "white8");
+                    if(whiteTurn == true) movePiece(white8);
+                    whiteTurn = false;
+                }
+            });
+
+            white9.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.i(LOG_TAG, "white9");
+                    if(whiteTurn == true) movePiece(white9);
+                    whiteTurn = false;
+                }
+            });
+
+            white10.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.i(LOG_TAG, "white10");
+                    if(whiteTurn == true) movePiece(white10);
+                    whiteTurn = false;
+                }
+            });
+
+            white11.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.i(LOG_TAG, "white11");
+                    if(whiteTurn == true) movePiece(white11);
+                    whiteTurn = false;
+                }
+            });
+
+            white12.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.i(LOG_TAG, "white12");
+                    if(whiteTurn == true) movePiece(white12);
+                    whiteTurn = false;
+                }
+            });
+        }
+    }
+
+    public void initializeBlackPieceListeners(){
+        if ((Integer) myIntent.getExtras().get("players") == 1 || (Integer) myIntent.getExtras().get("players") == 2) {
+
+            black1.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    Log.i(LOG_TAG, "black1");
+                    if(blackTurn == true) movePiece(black1);
+                    blackTurn = false;
+                }
+            });
+
+            black2.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    Log.i(LOG_TAG, "black2");
+                    if(blackTurn == true) movePiece(black2);
+                    blackTurn = false;
+                }
+            });
+
+            black3.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    Log.i(LOG_TAG, "black3");
+                    if(blackTurn == true) movePiece(black3);
+                    blackTurn = false;
+                }
+            });
+
+            black4.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    Log.i(LOG_TAG, "black4");
+                    if(blackTurn == true) movePiece(black4);
+                    blackTurn = false;
+                }
+            });
+
+            black5.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    Log.i(LOG_TAG, "black5");
+                    if(blackTurn == true) movePiece(black5);
+                    blackTurn = false;
+                }
+            });
+
+            black6.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    Log.i(LOG_TAG, "black6");
+                    if(blackTurn == true) movePiece(black6);
+                    blackTurn = false;
+                }
+            });
+
+            black7.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    Log.i(LOG_TAG, "black7");
+                    if(blackTurn == true) movePiece(black7);
+                    blackTurn = false;
+                }
+            });
+
+            black8.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    Log.i(LOG_TAG, "black8");
+                    if(blackTurn == true) movePiece(black8);
+                    blackTurn = false;
+                }
+            });
+
+            black9.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    Log.i(LOG_TAG, "black9");
+                    if(blackTurn == true) movePiece(black9);
+                    blackTurn = false;
+                }
+            });
+
+            black10.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    Log.i(LOG_TAG, "black10");
+                    if(blackTurn == true) movePiece(black10);
+                    blackTurn = false;
+                }
+            });
+
+            black11.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    Log.i(LOG_TAG, "black11");
+                    if(blackTurn == true) movePiece(black11);
+                    blackTurn = false;
+                }
+            });
+
+            black12.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    Log.i(LOG_TAG, "black12");
+                    if(blackTurn == true) movePiece(black12);
+                    blackTurn = false;
+                }
+            });
+
+            black13.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    Log.i(LOG_TAG, "black13");
+                    if(blackTurn == true) movePiece(black13);
+                    blackTurn = false;
+                }
+            });
+
+            black14.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    Log.i(LOG_TAG, "black14");
+                    if(blackTurn == true) movePiece(black14);
+                    blackTurn = false;
+                }
+            });
+
+            black15.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    Log.i(LOG_TAG, "black15");
+                    if(blackTurn == true) movePiece(black15);
+                    blackTurn = false;
+                }
+            });
+
+            black16.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    Log.i(LOG_TAG, "black16");
+                    if(blackTurn == true) movePiece(black16);
+                    blackTurn = false;
+                }
+            });
+
+            black17.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    Log.i(LOG_TAG, "black17");
+                    if(blackTurn == true) movePiece(black17);
+                    blackTurn = false;
+                }
+            });
+
+            black18.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    Log.i(LOG_TAG, "black18");
+                    if(blackTurn == true) movePiece(black18);
+                    blackTurn = false;
+                }
+            });
+
+            black19.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    Log.i(LOG_TAG, "black19");
+                    if(blackTurn == true) movePiece(black19);
+                    blackTurn = false;
+                }
+            });
+
+            black20.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    Log.i(LOG_TAG, "black20");
+                    if(blackTurn == true) movePiece(black20);
+                    blackTurn = false;
+                }
+            });
+
+            black21.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    Log.i(LOG_TAG, "black21");
+                    if(blackTurn == true) movePiece(black21);
+                    blackTurn = false;
+                }
+            });
+
+            black22.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    Log.i(LOG_TAG, "black22");
+                    if(blackTurn == true) movePiece(black22);
+                    blackTurn = false;
+                }
+            });
+
+            black23.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    Log.i(LOG_TAG, "black23");
+                    if(blackTurn == true) movePiece(black23);
+                    blackTurn = false;
+                }
+            });
+
+            black24.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    Log.i(LOG_TAG, "black24");
+                    if(blackTurn == true) movePiece(black24);
+                    blackTurn = false;
+                }
+            });
+        }
+    }
+
     public void movePiece(final ImageView move){
         final RelativeLayout parent = (RelativeLayout) findViewById(R.id.parent);
         editable = true;
+
+        int xcoardinate = validx[0];
+        int ycoardinate = validy[0];
+
+        int count = 0;
+        if (editable && move.getY() > top && move.getY() < bottom) {
+            while (move.getX() - psize > xcoardinate && count < 11) {
+                xcoardinate = validx[count++];
+            }
+            /*if(count != 0){
+                --count;
+            }*/
+            lastXPos = count;
+
+            count = 0;
+            while (move.getY() - psize > ycoardinate && count < 11) {
+                ycoardinate = validy[count++];
+            }
+            if(count != 0){
+                --count;
+            }
+            lastYPos = count;
+            Log.e("GameBoard1", "  " + lastXPos + " " + lastYPos);
+        }
 
         parent.setOnTouchListener(new OnTouchListener() {
             public boolean onTouch(View v, MotionEvent ev) {
@@ -654,21 +726,28 @@ public class GameBoard extends Activity{
                     while (ev.getX() - psize > xcoardinate && count < 11) {
                         xcoardinate = validx[count++];
                     }
+                    if(count != 0){
+                        --count;
+                    }
+                    newXPos = count;
 
                     count = 0;
                     while (ev.getY() - psize > ycoardinate && count < 11) {
                         ycoardinate = validy[count++];
                     }
+                    if(count != 0){
+                        --count;
+                    }
+                    newYPos = count;
+                    Log.e("GameBoard2", "  " + newXPos + " " + newYPos);
+
+                    //Log.i(LOG_TAG, "ANIMATE!" + xcoardinate + " " + ycoardinate);
 
 
-                    Log.i(LOG_TAG, "ANIMATE!" + xcoardinate + " " + ycoardinate);
-
-
-                    move.animate().x(xcoardinate).setDuration(1);
-                    move.animate().y(ycoardinate).setDuration(1);
+                    //move.animate().x(xcoardinate).setDuration(1);
+                    //move.animate().y(ycoardinate).setDuration(1);
                     editable = false;
                 }
-
 
                 return true;
             }

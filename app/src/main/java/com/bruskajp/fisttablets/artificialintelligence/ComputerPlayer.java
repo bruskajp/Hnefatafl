@@ -24,6 +24,9 @@ public class ComputerPlayer extends Player{
         makeNextMove();
     }
 
+    @Override
+    public void finishTurn() {}
+
     public void initializeComputerPlayer() {
         //Log.i(LOG_TAG, "This is how to log things to console");
     }

@@ -36,6 +36,8 @@ public abstract class Player {
 
     public abstract void takeTurn();
 
+    public abstract void finishTurn();
+
     public boolean movePiece(int oldXPosition, int oldYPosition, int newXPosition, int newYPosition){
         if(tokenMovement.movePiece(oldXPosition,oldYPosition,newXPosition,newYPosition)){
             return true;

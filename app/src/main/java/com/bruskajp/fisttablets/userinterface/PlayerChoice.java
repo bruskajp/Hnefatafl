@@ -68,15 +68,15 @@ public class PlayerChoice extends Activity{
     }
 
     public void initializeMenu(){
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.single_player_choice);
 
-        buttonWhitePlayer  = (Button) findViewById(R.id.buttonWhitePlayer);
+        buttonWhitePlayer = (Button) findViewById(R.id.buttonWhitePlayer);
         buttonWhitePlayer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 Intent myIntent = new Intent(v.getContext(), GameBoard.class);
-                myIntent.putExtra("color", "black");
+                myIntent.putExtra("color", "white");
                 myIntent.putExtra("players", 1);
                 startActivityForResult(myIntent, 0);
 
@@ -90,7 +90,7 @@ public class PlayerChoice extends Activity{
                 //Log.i(LOG_TAG, "This is how a button works and how to log things to console");
 
                 Intent myIntent = new Intent(v.getContext(), GameBoard.class);
-                myIntent.putExtra("color", "white");
+                myIntent.putExtra("color", "black");
                 myIntent.putExtra("players", 1);
                 startActivityForResult(myIntent, 0);
 

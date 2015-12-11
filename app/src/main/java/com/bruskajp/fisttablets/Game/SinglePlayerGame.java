@@ -20,6 +20,9 @@ public class SinglePlayerGame extends Game{
     GameBoard gameBoard;
     Player player1;
     Player player2;
+    int gameBoardLastXPos = -1;
+    int gameBoardLastYPos = -1;
+
 
     public SinglePlayerGame(GameBoard gameBoard){
         this.gameBoard = gameBoard;
@@ -38,6 +41,7 @@ public class SinglePlayerGame extends Game{
             gameConnection2.beginGame();
 
             while(!player1.isWinner() && !player2.isWinner()){
+                if(player1.isWinner() || player2.isWinner()) break;
                 player1.takeTurn();
                 gameConnection1.sendMove(gameConnection2, player1, player2);
                 synchronized (this) {
@@ -49,8 +53,24 @@ public class SinglePlayerGame extends Game{
                 }
 
                 if(player1.isWinner() || player2.isWinner()) break;
+
                 player2.takeTurn();
+                do{
+                    gameBoard.whiteTurn = true;
+                    gameBoard.newXPos = gameBoardLastXPos;
+                    gameBoard.newYPos = gameBoardLastYPos;
+                    while(gameBoard.newXPos == gameBoardLastXPos && gameBoard.newYPos == gameBoardLastYPos){}
+                    Log.e("SinglePlayerGame", gameBoard.newXPos + "  " + gameBoard.lastXPos + "  " + gameBoard.newYPos + "  " + gameBoard.lastYPos + "\n");
+                }while(!player2.movePiece(gameBoard.lastXPos, gameBoard.lastYPos, gameBoard.newXPos, gameBoard.newYPos));
+                Log.e("SinglePlayerGame", gameBoard.newXPos + "  " + gameBoard.newYPos + "\n");
+                gameBoardLastXPos = gameBoard.newXPos;
+                gameBoardLastYPos = gameBoard.newYPos;
+                gameBoard.lastXPos = gameBoard.newXPos;
+                gameBoard.lastYPos = gameBoard.newYPos;
+                player2.finishTurn();
+                Log.e("SinglePlayerGame", "check 2 \n");
                 gameConnection2.sendMove(gameConnection1, player2, player1);
+                Log.e("SinglePlayerGame", "check 3 \n");
             }
         } else {
             player1 = new ComputerPlayer(Player.PlayerType.WHITE);
@@ -63,9 +83,22 @@ public class SinglePlayerGame extends Game{
 
             while(!player1.isWinner() && !player2.isWinner()){
                 if(player1.isWinner() || player2.isWinner()) break;
+
                 player2.takeTurn();
+                do{
+                    gameBoard.blackTurn = true;
+                    gameBoard.newXPos = gameBoardLastXPos;
+                    gameBoard.newYPos = gameBoardLastYPos;
+                    while(gameBoard.newXPos == gameBoardLastXPos && gameBoard.newYPos == gameBoardLastYPos){}
+                }while(player2.movePiece(gameBoard.lastXPos, gameBoardLastYPos, gameBoard.newXPos, gameBoard.newYPos));
+                gameBoardLastXPos = gameBoard.newXPos;
+                gameBoardLastYPos = gameBoard.newYPos;
+                gameBoard.lastXPos = gameBoard.newXPos;
+                gameBoard.lastYPos = gameBoard.newYPos;
+                player2.finishTurn();
                 gameConnection2.sendMove(gameConnection1, player2, player1);
 
+                if(player1.isWinner() || player2.isWinner()) break;
                 player1.takeTurn();
                 gameConnection1.sendMove(gameConnection2, player1, player2);
                 synchronized (this) {
