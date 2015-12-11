@@ -45,8 +45,8 @@ Jacob: Artificial Intelligence
 \end{itemize}
 David: Graphical User Interface
 \begin{itemize}
-  \item 
-  \item 
+  \item Wanted to increase knowledge on programming a GUI
+  \item Interested in what makes a good user interface
 \end{itemize}
 Benjamin: Networking, Documentation, and Report management
 \begin{itemize}
@@ -77,7 +77,7 @@ Benjamin: Networking, Documentation, and Report management
         20 21 22 23 24
 \end{verbatim}
 When you want to move a piece you have to first click on it to select it. This enables you to be able to select on anywhere on the beard to then move that piece. Where ever you touch if it is a valid place to move the piece will move to that place. This is accomplished by having a on touch command on every piece which is essentially an imageview. When a valid movement place is selected the image view is then moved to that position on the board. This was implemented using the Publisher Subscriber Pattern where each piece was a subscriber with its own listener. 
-
+The GUI has four classes that control the game. The first class is \textit{MainMenu}. This gives the player three options. They can start a local game between two people. Play against the AI, and finally watch a demo of the game happening. If the player chooses to play against the AI there is a splash screen that is controlled by \textit{PlayerChoice}. All this class does is set the player to using white or black according to their choice. \textit{GameBoard} is the class that controls the game board. It contains everything that is needed to play the game. It also has an exit button if the player wants to exit the game before it is over. The final class is \textit{MoveAttempt}. This class was going to store moves when they happened, but we ended up not using it at this time. At a later point in development it will be used. 
 \subsubsection{Game Logic}
 	The game logic is split into many parts similar to the way the real world functions. There is the board and its pieces. The player, who is in a game, makes moves following some set of rules. This layout is what the implementation tried to follow.\par
 	Firstly, there is a \textit{Token} class. This only holds the information of each board piece such as its color and position. Then there is a \textit{Board} class. This is the board state including what tokens are on the board, their positions, and the ability change these things. Next is the \textit{Move} class which just holds the information about a move (old position, new position, and the deleted tokens). There is also a \textit{TokenMovement} class. This describes all of the legal moves that a token can make. It records the previous moves that were made and deletes the tokens that need to be. It also has the responsibility of doing an undo action. It essentially holds all of the game rules. \par
