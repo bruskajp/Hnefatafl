@@ -779,6 +779,7 @@ public class GameBoard extends Activity{
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+                            pi.iv.setOnClickListener(null);
                             pi.iv.setImageBitmap(null);
                         }
                     });
