@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewManager;
 import android.widget.Button;
 
 import java.lang.String;
@@ -780,7 +781,7 @@ public class GameBoard extends Activity{
                         @Override
                         public void run() {
                             pi.iv.setOnClickListener(null);
-                            pi.iv.setImageBitmap(null);
+                            pi.iv.setVisibility(View.INVISIBLE);
                         }
                     });
                     piecesInfo.remove(pi);
