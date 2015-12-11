@@ -84,6 +84,7 @@ public class TokenMovement {
             return (checkValidXPosAndYPos(token, newXPosition, newYPosition) && movePiece(token, newXPosition, newYPosition));
         }
 
+        Log.i("TokenMovement", "why?");
         return false;
     }
 

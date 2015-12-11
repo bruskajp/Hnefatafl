@@ -708,11 +708,11 @@ public class GameBoard extends Activity{
 
             count = 0;
             while (move.getY() - psize > ycoardinate && count < 11) {
-                ycoardinate = validy[count++];
+                ycoardinate = validy[++count];
             }
-            if(count != 0){
-                --count;
-            }
+            //if(count != 0){
+            //    --count;
+            //}
             lastYPos = count;
             Log.e("GameBoard1", "  " + lastXPos + " " + lastYPos);
         }

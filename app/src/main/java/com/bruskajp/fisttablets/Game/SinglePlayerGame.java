@@ -22,6 +22,7 @@ public class SinglePlayerGame extends Game{
     Player player2;
     int gameBoardLastXPos = -1;
     int gameBoardLastYPos = -1;
+    int hackFix = 0;
 
 
     public SinglePlayerGame(GameBoard gameBoard){
@@ -69,6 +70,11 @@ public class SinglePlayerGame extends Game{
                         }
                     }
                     Log.e("SinglePlayerGame", gameBoard.newXPos + "  " + gameBoard.lastXPos + "  " + gameBoard.newYPos + "  " + gameBoard.lastYPos + "\n");
+                    /*if(hackFix == 0){
+                        ++hackFix;
+                    } else {
+                        ++gameBoard.lastYPos;
+                    }*/
                 }while(!player2.moveHumanPiece(gameBoard.lastXPos, gameBoard.lastYPos, gameBoard.newXPos, gameBoard.newYPos));
                 Log.e("SinglePlayerGame", gameBoard.newXPos + "  " + gameBoard.newYPos + "\n");
                 gameBoardLastXPos = gameBoard.newXPos;
@@ -106,6 +112,11 @@ public class SinglePlayerGame extends Game{
                             }
                         }
                     }
+                    /*if(hackFix == 0){
+                        ++hackFix;
+                    } else {
+                        ++gameBoard.lastYPos;
+                    }*/
                 }while(!player2.moveHumanPiece(gameBoard.lastXPos, gameBoard.lastYPos, gameBoard.newXPos, gameBoard.newYPos));
                 gameBoardLastXPos = gameBoard.newXPos;
                 gameBoardLastYPos = gameBoard.newYPos;
