@@ -15,6 +15,9 @@ import java.util.Map;
  * Created by meliteja on 11/3/15
  */
 
+/***
+ * Used to find all valid moves a particular player can make.
+ */
 public class ComputerPlayerOptions{
 
     Board board;
