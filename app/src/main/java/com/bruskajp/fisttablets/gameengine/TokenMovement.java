@@ -79,10 +79,9 @@ public class TokenMovement {
 
     public boolean moveHumanPiece(int oldXPosition, int oldYPosition, int newXPosition, int newYPosition){
         Token token;
-        token =board.checkBoardPosition(oldXPosition,oldYPosition);
 
-        if(checkValidXPosAndYPos(token, newXPosition, newYPosition) && movePiece(token, newXPosition, newYPosition)){
-            return true;
+        if((token=board.checkBoardPosition(oldXPosition,oldYPosition))!=null){
+            return (checkValidXPosAndYPos(token, newXPosition, newYPosition) && movePiece(token, newXPosition, newYPosition));
         }
 
         return false;
