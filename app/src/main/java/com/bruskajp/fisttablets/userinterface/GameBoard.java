@@ -288,9 +288,9 @@ public class GameBoard extends Activity{
             });
         }
 
-        thread.start();
 
         this.initializeMenu();
+        thread.start();
     }
 
     protected void onResume() {
