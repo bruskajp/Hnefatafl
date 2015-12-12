@@ -1,0 +1,3 @@
+The .apk is in the app folder and is named app-release.apk
+
+If this does not work (it should) then there are debugging apks in app/build/outputs/apk
