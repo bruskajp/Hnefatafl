@@ -69,6 +69,9 @@ public class MainMenu extends Activity{
         return super.onOptionsItemSelected(item);
     }
 
+    /***
+     * Initializes the main menu.
+     */
     public void initializeMenu(){
         setContentView(R.layout.activity_main);
         buttonStartLocalGame = (Button) findViewById(R.id.buttonStartLocalGame);

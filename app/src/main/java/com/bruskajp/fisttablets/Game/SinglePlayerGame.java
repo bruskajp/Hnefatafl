@@ -30,8 +30,12 @@ public class SinglePlayerGame extends Game{
         initializeGame();
     }
 
+    /***
+     * Initializes the SinglePlayerGame
+     */
     @Override
     void initializeGame() {
+        // Case where the person picks a white player.
         if(gameBoard.playerColor.equals("white")){
             player1 = new ComputerPlayer(Player.PlayerType.BLACK);
             player2 = new HumanPlayer(Player.PlayerType.WHITE);
@@ -86,6 +90,7 @@ public class SinglePlayerGame extends Game{
                 gameConnection2.sendMove(gameConnection1, player2, player1);
                 Log.e("SinglePlayerGame", "check 3 \n");
             }
+        // Case where the person picks a black player.
         } else {
             player1 = new ComputerPlayer(Player.PlayerType.WHITE);
             player2 = new HumanPlayer(Player.PlayerType.BLACK);
@@ -112,11 +117,6 @@ public class SinglePlayerGame extends Game{
                             }
                         }
                     }
-                    /*if(hackFix == 0){
-                        ++hackFix;
-                    } else {
-                        ++gameBoard.lastYPos;
-                    }*/
                 }while(!player2.moveHumanPiece(gameBoard.lastXPos, gameBoard.lastYPos, gameBoard.newXPos, gameBoard.newYPos));
                 gameBoardLastXPos = gameBoard.newXPos;
                 gameBoardLastYPos = gameBoard.newYPos;
@@ -138,16 +138,9 @@ public class SinglePlayerGame extends Game{
             }
         }
 
-
-
-        // TODO: Fix this
-
         if(player1.isWinner()){
             Log.i("SinglePlayerGame", "The winner is " + (player1.getWinnerType() == Player.PlayerType.WHITE ? "WHITE" : "BLACK")
                     + " not " + (player1.getWinnerType() == Player.PlayerType.WHITE ? "BLACK" : "WHITE") );
         }
-
-
-        // Do winning stuff
     }
 }

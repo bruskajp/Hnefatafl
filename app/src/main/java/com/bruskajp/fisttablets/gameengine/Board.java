@@ -25,24 +25,39 @@ public class Board {
         initializeBoardState();
     }
 
+    /***
+     * Gets all remaining pieces on the board.
+     * @return A {@code HashSet<Token>} of all the remaining Tokens.
+     */
     public HashSet<Token> getRemainingPieces(){
         // HACK: This is not the safest way, as the hashset is passed without any readonly protection, but I just put this here for now.
         return remainingPieces;
     }
 
+    /***
+     * Gets all valid movements for the Board.
+     * @param xPosition The {@code int} describing the x position to check.
+     * @param yPosition The {@code int} describing the y position to check.
+     * @return A {@code Token} with what is in the position of the Board.
+     */
     public Token checkBoardPosition(int xPosition, int yPosition){
         if(xPosition<0||yPosition<0||xPosition>=BOARD_LENGTH||yPosition>=BOARD_LENGTH) return null;
         return board[xPosition][yPosition];
     }
 
+    /***
+     * Initializes the board state
+     */
     private void initializeBoardState() {
         board = new Token[BOARD_LENGTH][BOARD_LENGTH];
         remainingPieces = new HashSet<>();
         setBlackBoardPieces();
         setWhiteBoardPieces();
-        setUpPieceListeners();
     }
 
+    /***
+     * Set up the black tokens on the board.
+     */
     private void setBlackBoardPieces(){
         for (int xPosition = 3; xPosition <= 7; ++xPosition) {
             remainingPieces.add(board[xPosition][0] = new Token(xPosition, 0, Token.TokenType.BLACK));
@@ -65,6 +80,9 @@ public class Board {
         remainingPieces.add(board[9][5] = new Token(9, 5, Token.TokenType.BLACK));
     }
 
+    /***
+     * Sets up the white tokens on the board.
+     */
     private void setWhiteBoardPieces() {
         remainingPieces.add(board[5][3] = new Token(5, 3, Token.TokenType.WHITE));
         remainingPieces.add(board[5][4] = new Token(5, 4, Token.TokenType.WHITE));
@@ -84,13 +102,13 @@ public class Board {
         remainingPieces.add(board[7][5] = new Token(7, 5, Token.TokenType.WHITE));
     }
 
+    /***
+     * Removes a Token from the Board.
+     * @param token The {@code Token} to be removed.
+     */
     public void removePiece(Token token){
         remainingPieces.remove(token);
         board[token.getxPosition()][token.getyPosition()] = null;
-    }
-
-    public void setUpPieceListeners(){
-        //THIS IS YOU DAVID
     }
 
     @Override

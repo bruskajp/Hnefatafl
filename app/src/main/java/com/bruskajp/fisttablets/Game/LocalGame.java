@@ -29,6 +29,9 @@ public class LocalGame extends Game{
         initializeGame();
     }
 
+    /***
+     * Initializes the LocalGame
+     */
     @Override
     void initializeGame(){
         player1 = new HumanPlayer(Player.PlayerType.BLACK);
@@ -55,17 +58,13 @@ public class LocalGame extends Game{
                         }
                     }
                 }
-                Log.e("SinglePlayerGame", gameBoard.newXPos + "  " + gameBoard.lastXPos + "  " + gameBoard.newYPos + "  " + gameBoard.lastYPos + "\n");
             }while(!player1.moveHumanPiece(gameBoard.lastXPos, gameBoard.lastYPos, gameBoard.newXPos, gameBoard.newYPos));
-            Log.e("SinglePlayerGame", gameBoard.newXPos + "  " + gameBoard.newYPos + "\n");
             gameBoardLastXPosBlack = gameBoard.newXPos;
             gameBoardLastYPosBlack = gameBoard.newYPos;
             gameBoard.lastXPos = gameBoard.newXPos;
             gameBoard.lastYPos = gameBoard.newYPos;
             player1.finishTurn();
-            Log.e("SinglePlayerGame", "check 2 \n");
             gameConnection2.sendMove(gameConnection2, player1, player2);
-            Log.e("SinglePlayerGame", "check 3 \n");
 
             if(player1.isWinner() || player2.isWinner()) break;
 
@@ -83,17 +82,13 @@ public class LocalGame extends Game{
                         }
                     }
                 }
-                Log.e("SinglePlayerGame", gameBoard.newXPos + "  " + gameBoard.lastXPos + "  " + gameBoard.newYPos + "  " + gameBoard.lastYPos + "\n");
             }while(!player2.moveHumanPiece(gameBoard.lastXPos, gameBoard.lastYPos, gameBoard.newXPos, gameBoard.newYPos));
-            Log.e("SinglePlayerGame", gameBoard.newXPos + "  " + gameBoard.newYPos + "\n");
             gameBoardLastXPosWhite = gameBoard.newXPos;
             gameBoardLastYPosWhite = gameBoard.newYPos;
             gameBoard.lastXPos = gameBoard.newXPos;
             gameBoard.lastYPos = gameBoard.newYPos;
             player2.finishTurn();
-            Log.e("SinglePlayerGame", "check 2 \n");
             gameConnection2.sendMove(gameConnection1, player2, player1);
-            Log.e("SinglePlayerGame", "check 3 \n");
         }
 
         Log.i("LocalGame", "The winner is" + player1.isWinner() + "or" + player2.isWinner());

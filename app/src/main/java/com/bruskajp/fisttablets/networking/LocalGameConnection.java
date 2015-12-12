@@ -20,6 +20,10 @@ public class LocalGameConnection extends GameConnection{
         this.gameBoard = gameBoard;
     }
 
+    /***
+     * Sends a move locally over the device.
+     */
+    @Override
     public void sendMove(GameConnection gameConnection, Player player1, Player player2) {
         Move lastMove = player1.getLastMove();
         Log.i("LocalGameConnection", " " + lastMove.getPreviousX() + " " + lastMove.getPreviousY() + " " + lastMove.getNewX() + " " + lastMove.getNewY());
@@ -29,6 +33,10 @@ public class LocalGameConnection extends GameConnection{
         gameConnection.receiveMove(player1.getLastMove(), player2);
     }
 
+    /***
+     * Receives a move locally over the device.
+     */
+    @Override
     public void receiveMove(Move lastMove, Player player) {
         player.movePiece(lastMove.getPreviousX(), lastMove.getPreviousY(), lastMove.getNewX(), lastMove.getNewY()); //can use null because it is not used
         gameBoard.movePieceComputer(lastMove.getPreviousX(), lastMove.getPreviousY(), lastMove.getNewX(), lastMove.getNewY(),lastMove.getDeletedTokens());

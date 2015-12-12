@@ -67,6 +67,9 @@ public class PlayerChoice extends Activity{
         return super.onOptionsItemSelected(item);
     }
 
+    /***
+     * Initializes the main menu.
+     */
     public void initializeMenu(){
         setContentView(R.layout.single_player_choice);
 

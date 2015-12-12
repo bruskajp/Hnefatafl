@@ -23,6 +23,9 @@ public class DemoGame extends Game{
         initializeGame();
     }
 
+    /***
+     * Initializes the DemoGame
+     */
     @Override
     void initializeGame() {
         Player player1 = new ComputerPlayer(Player.PlayerType.BLACK);
@@ -31,6 +34,8 @@ public class DemoGame extends Game{
         gameConnection2 = new LocalGameConnection(player2, gameBoard);
         gameConnection1.beginGame();
         gameConnection2.beginGame();
+
+        // wait to let the board rendering finish
         synchronized(this){
             try {
                 wait(10000);
@@ -38,6 +43,7 @@ public class DemoGame extends Game{
                 e.printStackTrace();
             }
         }
+
         while(!player1.isWinner() && !player2.isWinner()){
 
             player1.takeTurn();
@@ -61,14 +67,9 @@ public class DemoGame extends Game{
             }
         }
 
-        // TODO: Fix this
-
         if(player1.isWinner()){
             Log.i("SinglePlayerGame", "The winner is " + (player1.getWinnerType() == Player.PlayerType.WHITE ? "WHITE" : "BLACK")
                     + " not " + (player1.getWinnerType() == Player.PlayerType.WHITE ? "BLACK" : "WHITE") );
         }
-
-
-        // Do winning stuff
     }
 }

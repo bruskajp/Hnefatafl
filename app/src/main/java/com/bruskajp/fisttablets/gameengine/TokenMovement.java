@@ -25,6 +25,13 @@ public class TokenMovement {
         edgeIndex= Board.BOARD_LENGTH-1;
     }
 
+    /***
+     * Checks if a move is possible.
+     * @param token The {@code Token} to describe the original position.
+     * @param xPosition The {@code int} to describe the moves new xPosition.
+     * @param yPosition The {@code int} to describe the moves new yPosition.
+     * @return A {@code Boolean} of if the move is valid.
+     */
     public Boolean isMoveValid(Token token, int xPosition, int yPosition) {
         if(xPosition<0||yPosition<0||xPosition>edgeIndex||yPosition>edgeIndex) return false;
         if(!token.isKing()){
@@ -43,6 +50,13 @@ public class TokenMovement {
         }
     }
 
+    /***
+     * Checks if the spaces between a Token and its destination in a move are clear.
+     * @param token The {@code Token} to describe the original position.
+     * @param xPosition The {@code int} to describe the moves new xPosition.
+     * @param yPosition The {@code int} to describe the moves new yPosition.
+     * @return A {@code boolean} of if the spaces are clear.
+     */
     public boolean checkValidXPosAndYPos(Token token, int xPosition, int yPosition){
         if(xPosition > token.xPosition) {
             for(int counter = token.xPosition + 1; counter < xPosition; ++counter){
@@ -69,6 +83,14 @@ public class TokenMovement {
         return false;
     }
 
+    /***
+     * Attempts to move a Token on the board.
+     * @param oldXPosition The {@code int} to describe the moves old xPosition.
+     * @param oldYPosition The {@code int} to describe the moves old yPosition.
+     * @param newXPosition The {@code int} to describe the moves new xPosition.
+     * @param newYPosition The {@code int} to describe the moves new yPosition.
+     * @return A {@code boolean} of the moves success.
+     */
     public boolean movePiece(int oldXPosition, int oldYPosition, int newXPosition, int newYPosition) {
         Token tok;
         if((tok=board.checkBoardPosition(oldXPosition,oldYPosition))!=null){
@@ -77,6 +99,14 @@ public class TokenMovement {
         return false;
     }
 
+    /***
+     * Attempts to move a Token on the board (specifically used for HumanPlayers).
+     * @param oldXPosition The {@code int} to describe the moves old xPosition.
+     * @param oldYPosition The {@code int} to describe the moves old yPosition.
+     * @param newXPosition The {@code int} to describe the moves new xPosition.
+     * @param newYPosition The {@code int} to describe the moves new yPosition.
+     * @return A {@code boolean} of the moves success.
+     */
     public boolean moveHumanPiece(int oldXPosition, int oldYPosition, int newXPosition, int newYPosition){
         Token token;
 
@@ -88,6 +118,13 @@ public class TokenMovement {
         return false;
     }
 
+    /***
+     * Attempts to move a Token on the board.
+     * @param token The {@code Token} to describe the original position.
+     * @param xPosition The {@code int} to describe the moves new xPosition.
+     * @param yPosition The {@code int} to describe the moves new yPosition.
+     * @return A {@code boolean} of the moves success.
+     */
     public boolean movePiece(Token token, int xPosition, int yPosition){
         if (isMoveValid(token, xPosition, yPosition)) {
             int oldxPosition = token.getxPosition();
@@ -129,6 +166,12 @@ public class TokenMovement {
         }
     }
 
+    /***
+     * Removes the pieces from the Board for a valid move.
+     * @param xPosition The {@code int} to describe the moves old xPosition.
+     * @param yPosition The {@code int} to describe the moves old yPosition.
+     * @return A {@code LinkedList<Token>} of the Tokens removed.
+     */
     LinkedList<Token> removePieces(int xPosition, int yPosition){
         // This may throw an index out of bounds exception...
         LinkedList<Token> deletedTokens = new LinkedList<>();
@@ -262,6 +305,10 @@ public class TokenMovement {
         }
     }
 
+    /***
+     * Gets the most recent Move;
+     * @return A {@code Move} with the details of the most recent move.
+     */
     public Move getlastMove(){
         if(moves.size() == 0){
             return null;
@@ -269,10 +316,18 @@ public class TokenMovement {
         return moves.get(moves.size()-1);
     }
 
+    /***
+     * Gets whether the Player is a winner;
+     * @return A {@code boolean} with whether this Player is a winner.
+     */
     public boolean isWinner() {
         return this.winner;
     }
 
+    /***
+     * Gets the color of the winner;
+     * @return An {@code PlayerType} with the winning Player's color.
+     */
     public Player.PlayerType getWinnerType(){
         return this.winnerColor;
     }

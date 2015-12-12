@@ -65,8 +65,8 @@ public class ComputerPlayerOptions{
     /***
      * Gets all valid movements for a given {@code Token}. {@code tok}, in the direction {@code dir}.
      * @param tok The {@code Token} to get the movements for.
-     * @param dir The {@code Direction} to seach for valid movements.
-     * @return A {@code List<MovementData>} of all valid movements for {@code tok} in the diretion {@code dir}.
+     * @param dir The {@code Direction} to search for valid movements.
+     * @return A {@code List<MovementData>} of all valid movements for {@code tok} in the direction {@code dir}.
      */
     public List<MovementData> getTokenOptions(Token tok, Direction dir){
         List<MovementData> list = new LinkedList<>();

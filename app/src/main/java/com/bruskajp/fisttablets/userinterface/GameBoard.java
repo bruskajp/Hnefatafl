@@ -330,7 +330,9 @@ public class GameBoard extends Activity{
         return super.onOptionsItemSelected(item);
     }
 
-
+    /***
+     * Initializes the game board.
+     */
     public void initializeMenu() {
 
         initializeWhitePieceListeners();
@@ -347,6 +349,9 @@ public class GameBoard extends Activity{
         });
     }
 
+    /***
+     * Initializes the listeners for the White Tokens.
+     */
     public void initializeWhitePieceListeners() {
         if ((Integer) myIntent.getExtras().get("players") == 1 || (Integer) myIntent.getExtras().get("players") == 2) {
 
@@ -469,6 +474,9 @@ public class GameBoard extends Activity{
         }
     }
 
+    /***
+     * Initializes the listeners for the Black Tokens.
+     */
     public void initializeBlackPieceListeners(){
         if ((Integer) myIntent.getExtras().get("players") == 1 || (Integer) myIntent.getExtras().get("players") == 2) {
 
@@ -690,6 +698,10 @@ public class GameBoard extends Activity{
         }
     }
 
+    /***
+     * Sets the coordinates of the movement for a human player.
+     * @param move The {@code ImageView} to be used.
+     */
     public void movePiece(final ImageView move){
         final RelativeLayout parent = (RelativeLayout) findViewById(R.id.parent);
         editable = true;
@@ -702,9 +714,6 @@ public class GameBoard extends Activity{
             while (move.getX() - psize > xcoardinate && count < 11) {
                 xcoardinate = validx[count++];
             }
-            /*if(count != 0){
-                --count;
-            }*/
             lastXPos = count;
 
             count = 0;
@@ -753,11 +762,6 @@ public class GameBoard extends Activity{
                     newYPos = count;
                     Log.e("GameBoard2", "  " + newXPos + " " + newYPos);
 
-                    //Log.i(LOG_TAG, "ANIMATE!" + xcoardinate + " " + ycoardinate);
-
-
-                    //move.animate().x(xcoardinate).setDuration(1);
-                    //move.animate().y(ycoardinate).setDuration(1);
                     editable = false;
                 }
 
@@ -766,6 +770,14 @@ public class GameBoard extends Activity{
         });
     }
 
+    /***
+     * Moves a Token on the visual display.
+     * @param oldX The {@code int} to describe the moves old xPosition.
+     * @param oldY The {@code int} to describe the moves old yPosition.
+     * @param newX The {@code int} to describe the moves new xPosition.
+     * @param newY The {@code int} to describe the moves new yPosition.
+     * @param deletedToks The {@code LinkedList<Token>} to describe the deleted Tokens.
+     */
     public void movePieceComputer(int oldX, int oldY, int newX, int newY, LinkedList<Token> deletedToks){
         for(int i = 0 ; i < piecesInfo.size(); ++i){
             final PieceInfo pi = piecesInfo.get(i);
@@ -802,6 +814,9 @@ public class GameBoard extends Activity{
         }
     }
 
+    /***
+     * Initializes pieceInfo for each black piece.
+     */
     private void setBlackBoardPieces(){
         piecesInfo.add(new PieceInfo(black1,validx[3],validy[0]));
         piecesInfo.add(new PieceInfo(black2,validx[4],validy[0]));
@@ -837,6 +852,9 @@ public class GameBoard extends Activity{
         piecesInfo.add(new PieceInfo(black24,validx[7],validy[10]));
     }
 
+    /***
+     * Initializes pieceInfo for each black piece.
+     */
     private void setWhiteBoardPieces() {
 
         piecesInfo.add(new PieceInfo(white1,validx[5],validy[3]));

@@ -11,9 +11,6 @@ import com.bruskajp.fisttablets.userinterface.MainMenu;
 
 import java.io.IOException;
 
-// Doing tests for David
-// //
-
 public class MainActivity extends Activity {
 
     private final static String LOG_TAG = "MainActivity";

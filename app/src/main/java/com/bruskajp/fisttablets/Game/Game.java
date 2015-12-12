@@ -5,6 +5,9 @@ package com.bruskajp.fisttablets.Game;
  */
 public abstract class Game {
 
+    /***
+     * Initializes the Game
+     */
     abstract void initializeGame();
 
 }

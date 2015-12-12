@@ -21,11 +21,20 @@ public abstract class GameConnection{
         this.player = player;
     }
 
-    public void beginGame() {
+    public void beginGame() {}
 
-    }
-
+    /***
+     * Sends a move locally over the device.
+     * @param gameConnection The {@code GameConnection} to get the movements for.
+     * @param player1 The {@code Player} to send the moves to.
+     * @param player2 The {@code Player} to receive the moves.
+     */
     public abstract void sendMove(GameConnection gameConnection, Player player1, Player player2);
 
+    /***
+     * Receives a move locally over the device.
+     * @param lastMove The {@code Move} that is received.
+     * @param player The {@code Player} that receives the move.
+     */
     public abstract void receiveMove(Move lastMove, Player player);
 }

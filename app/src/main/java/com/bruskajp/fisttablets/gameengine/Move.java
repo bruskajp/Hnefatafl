@@ -8,8 +8,6 @@ import java.util.LinkedList;
 
 /**
  * This object is immutable
- *
- * Are this and MovementData the same thing?
  */
 final public class Move {
     private int previousX, previousY, newX, newY;
@@ -23,22 +21,42 @@ final public class Move {
         this.deletedTokens = deletedTokens;
     }
 
+    /***
+     * Gets the previous x value;
+     * @return An {@code int} with the previousX value.
+     */
     public int getPreviousX() {
         return previousX;
     }
 
+    /***
+     * Gets the previous y value;
+     * @return An {@code int} with the previousY value.
+     */
     public int getPreviousY() {
         return previousY;
     }
 
+    /***
+     * Gets the new x value;
+     * @return An {@code int} with the newX value.
+     */
     public int getNewX() {
         return newX;
     }
 
+    /***
+     * Gets the new y value;
+     * @return An {@code int} with the newY value.
+     */
     public int getNewY() {
         return newY;
     }
 
+    /***
+     * Gets the list of deleted tokens;
+     * @return A {@code LinkedList<Token>} with the deletedTokens.
+     */
     public LinkedList<Token> getDeletedTokens() {
         return deletedTokens;
     }
