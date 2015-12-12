@@ -46,7 +46,15 @@ public class LocalGame extends Game{
                 gameBoard.blackTurn = true;
                 gameBoard.newXPos = gameBoardLastXPosBlack;
                 gameBoard.newYPos = gameBoardLastYPosBlack;
-                while(gameBoard.newXPos == gameBoardLastXPosBlack && gameBoard.newYPos == gameBoardLastYPosBlack){}
+                while(gameBoard.newXPos == gameBoardLastXPosBlack && gameBoard.newYPos == gameBoardLastYPosBlack){
+                    synchronized (this){
+                        try {
+                            wait(50);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
                 Log.e("SinglePlayerGame", gameBoard.newXPos + "  " + gameBoard.lastXPos + "  " + gameBoard.newYPos + "  " + gameBoard.lastYPos + "\n");
             }while(!player1.moveHumanPiece(gameBoard.lastXPos, gameBoard.lastYPos, gameBoard.newXPos, gameBoard.newYPos));
             Log.e("SinglePlayerGame", gameBoard.newXPos + "  " + gameBoard.newYPos + "\n");
@@ -66,7 +74,15 @@ public class LocalGame extends Game{
                 gameBoard.whiteTurn = true;
                 gameBoard.newXPos = gameBoardLastXPosWhite;
                 gameBoard.newYPos = gameBoardLastYPosWhite;
-                while(gameBoard.newXPos == gameBoardLastXPosWhite && gameBoard.newYPos == gameBoardLastYPosWhite){}
+                while(gameBoard.newXPos == gameBoardLastXPosWhite && gameBoard.newYPos == gameBoardLastYPosWhite){
+                    synchronized (this){
+                        try {
+                            wait(50);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
                 Log.e("SinglePlayerGame", gameBoard.newXPos + "  " + gameBoard.lastXPos + "  " + gameBoard.newYPos + "  " + gameBoard.lastYPos + "\n");
             }while(!player2.moveHumanPiece(gameBoard.lastXPos, gameBoard.lastYPos, gameBoard.newXPos, gameBoard.newYPos));
             Log.e("SinglePlayerGame", gameBoard.newXPos + "  " + gameBoard.newYPos + "\n");

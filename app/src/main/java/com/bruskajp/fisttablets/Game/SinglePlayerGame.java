@@ -89,7 +89,15 @@ public class SinglePlayerGame extends Game{
                     gameBoard.blackTurn = true;
                     gameBoard.newXPos = gameBoardLastXPos;
                     gameBoard.newYPos = gameBoardLastYPos;
-                    while(gameBoard.newXPos == gameBoardLastXPos && gameBoard.newYPos == gameBoardLastYPos){}
+                    while(gameBoard.newXPos == gameBoardLastXPos && gameBoard.newYPos == gameBoardLastYPos){
+                        synchronized (this){
+                            try {
+                                wait(50);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
                 }while(player2.moveHumanPiece(gameBoard.lastXPos, gameBoardLastYPos, gameBoard.newXPos, gameBoard.newYPos));
                 gameBoardLastXPos = gameBoard.newXPos;
                 gameBoardLastYPos = gameBoard.newYPos;
